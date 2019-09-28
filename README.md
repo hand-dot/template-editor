@@ -157,7 +157,7 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 
 - removeは消して欲しいフィールドのIDを送る
 - addは引数なし
-
+- changeは変えたい情報を送る
 
 
 ```
