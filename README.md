@@ -47,9 +47,12 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"x": 45,
 				"y": 10
 			},
-			"width": 50,
+			"size": {
+				"width": 50,
+				"height": 100
+			},
 			"alignment": "left",
-			"size": 22.9,
+			"fontSize": 22.9,
 			"space": 7.4,
 			"type": "text",
 			"lineHeight": 1
@@ -59,9 +62,12 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"x": 90,
 				"y": 30
 			},
-			"width": 0,
+			"size": {
+				"width": 0,
+				"height": 100
+			},
 			"alignment": "center",
-			"size": 9.2,
+			"fontSize": 9.2,
 			"space": 0,
 			"type": "text",
 			"lineHeight": 1
@@ -71,9 +77,12 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"x": 83,
 				"y": 35
 			},
-			"width": 0,
+			"size": {
+				"width": 0,
+				"height": 100
+			},
 			"alignment": "center",
-			"size": 9.2,
+			"fontSize": 9.2,
 			"space": 0,
 			"type": "text",
 			"lineHeight": 1
@@ -83,9 +92,12 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"x": 50,
 				"y": 25
 			},
-			"width": 0,
+			"size": {
+				"width": 0,
+				"height": 100
+			},
 			"alignment": "left",
-			"size": 20,
+			"fontSize": 20,
 			"space": 0,
 			"type": "text",
 			"lineHeight": 1
@@ -95,9 +107,12 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"x": 6.3,
 				"y": 121.5
 			},
-			"width": 50,
+			"size": {
+				"width": 50,
+				"height": 100
+			},
 			"alignment": "left",
-			"size": 14.8,
+			"fontSize": 14.8,
 			"space": 3.6,
 			"type": "text",
 			"lineHeight": 0
@@ -107,9 +122,12 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"x": 29,
 				"y": 50
 			},
-			"width": 0,
+			"size": {
+				"width": 0,
+				"height": 100
+			},
 			"alignment": "center",
-			"size": 7,
+			"fontSize": 7,
 			"space": 0,
 			"type": "text",
 			"lineHeight": 1
@@ -119,9 +137,12 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"x": 25,
 				"y": 60
 			},
-			"width": 0,
+			"size": {
+				"width": 0,
+				"height": 100
+			},
 			"alignment": "center",
-			"size": 7,
+			"fontSize": 7,
 			"space": 0,
 			"type": "text",
 			"lineHeight": 1
@@ -131,9 +152,12 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"x": 12,
 				"y": 57
 			},
-			"width": 0,
+			"size": {
+				"width": 0,
+				"height": 100
+			},
 			"alignment": "left",
-			"size": 15,
+			"fontSize": 15,
 			"space": 0,
 			"type": "text",
 			"lineHeight": 1
@@ -154,11 +178,55 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 - activeは最新の変更されたフィールドのIDをfindして点灯させる
 - expandはJavascriptでUIステートとして持つ
 - grabは最終的にdataのcolumになるのでUIステートとして持つ
-
+  
+  　
+  
 - removeは消して欲しいフィールドのIDを送る
 - addは引数なし
 - changeは変えたい情報を送る
 
 
 ```
+unityInstance.SendMessage('Canvas', 'Remove', 'uuid-hoge-hoge');
+unityInstance.SendMessage('Canvas', 'Add');
+// type text
+unityInstance.SendMessage('Canvas', 'Change', '{
+	"id": "uuid-hoge-hoge",
+	"fieldName": "[お届け先]電話番号",
+	"position": {
+		"x": 91,
+		"y": 135.5
+	},
+	"size": {
+		"width": 95,
+		"height": 95
+	},
+	"alignment": "left",
+	"fontSize": 15,
+	"space": 0,
+	"type": "text",
+	"lineHeight": 1,
+	"sampledata": "08000000000"
+
+}');
+// type image
+unityInstance.SendMessage('Canvas', 'Change', '{
+	"id": "uuid-foo-bar",
+	"fieldName": "サイン",
+	"position": {
+		"x": 91,
+		"y": 135.5
+	},
+	"size": {
+		"width": 95,
+		"height": 95
+	},
+	"type": "image",
+	"sampledata": "base64......"
+}');
+```
+
+```
+unityから変更があった場合にどのようにくるか
+onChange
 ```
