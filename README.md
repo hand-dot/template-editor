@@ -28,6 +28,7 @@ unityInstance.SendMessage('Canvas', 'SetTemplate', '{
 }');
 unityInstance.SendMessage('Canvas', 'DownloadTemplate');
 unityInstance.SendMessage('Canvas', 'ImportImage', 'base64......');
+// 多分ここは引数のデータ形式が変わる ref https://github.com/hand-dot/labelmake.jp/issues/223
 unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 	"sampledata": [
 		{
@@ -228,5 +229,32 @@ unityInstance.SendMessage('Canvas', 'Change', '{
 
 ```
 unityから変更があった場合にどのようにくるか
-onChange
+
+onChangeTemplate( changedTemplateData => {
+// changedTemplateData
+// 	"name": "test template",
+// 	"pageSize": {
+// 		"width": 210,
+// 		"height": 297
+// 	},
+// 	"fontName": "NotoSansCJKjp"
+})
+
+onChangeField( changedFieldData => {
+// changedFieldData
+//  {
+// 	"id": "uuid-foo-bar",
+// 	"fieldName": "サイン",
+// 	"position": {
+// 		"x": 91,
+// 		"y": 135.5
+// 	},
+// 	"size": {
+// 		"width": 95,
+// 		"height": 95
+// 	},
+// 	"type": "image",
+// 	"sampledata": "base64......"
+// }
+})
 ```
