@@ -151,5 +151,14 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 
 ##  右サイドバー
 
+- activeは最新の変更されたフィールドのIDをfindして点灯させる
+- expandはJavascriptでUIステートとして持つ
+- grabは最終的にdataのcolumになるのでUIステートとして持つ
+
+- removeは消して欲しいフィールドのIDを送る
+- addは引数なし
+
+
+
 ```
 ```
