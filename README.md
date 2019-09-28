@@ -178,7 +178,7 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 
 - activeは最新の変更されたフィールドのIDをfindして点灯させる
 - expandはJavascriptでUIステートとして持つ
-- grabは最終的にdataのcolumになるのでUIステートとして持つ
+- grabは最終的にpositionsの配列の並び順となるのでUIステートとして持つ
   
   　
   
