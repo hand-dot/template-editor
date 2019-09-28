@@ -15,6 +15,8 @@
 
 ![](https://github.com/hand-dot/labelmake.jp/blob/master/design/template-editor.png)
 
+## 左サイドバーのメソッド
+
 ```
 unityInstance.SendMessage('Canvas', 'SetTemplate', '{
 	"name": "test template",
@@ -145,4 +147,9 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 	"name": "年賀はがき",
 	"fontName": "NotoSansCJKjp"
 }');
+```
+
+##  右サイドバー
+
+```
 ```
