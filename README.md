@@ -30,6 +30,8 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 		"height": 148
 	},
 	"fontName": "NotoSansCJKjp",
+	// これはまだアイデアだが、fontUriを持ってもいいかもしれない 
+	// "fontUri": "https://labelmake3.firebaseapp.com/pdfmake/vfs_fonts.js"
 	"fields": "positions": [
 		{
 			"id": "uuid-hogehoge1234",
