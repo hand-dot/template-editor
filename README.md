@@ -18,32 +18,23 @@
 ## 左サイドバーのメソッド
 
 ```
-unityInstance.SendMessage('Canvas', 'SetTemplate', '{
-	"name": "test template",
-	"pageSize": {
-		"width": 210,
-		"height": 297
-	},
-	"fontName": "NotoSansCJKjp"
-}');
 unityInstance.SendMessage('Canvas', 'DownloadTemplate');
 unityInstance.SendMessage('Canvas', 'ImportImage', 'base64......');
-// 多分ここは引数のデータ形式が変わる ref https://github.com/hand-dot/labelmake.jp/issues/223
+// ImportTemplateは初期化時にも使用される
+// 既存のテンプレートを読み込んだ場合
 unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
-	"sampledata": [
+	"templateName": "年賀はがき",
+	"image": null,
+	"pageSize": {
+		"width": 100,
+		"height": 148
+	},
+	"fontName": "NotoSansCJKjp",
+	"fields": "positions": [
 		{
-			"[お届け先]郵便番号": "1234567",
-			"[お届け先]住所1": "東京都東京1|2|3|4",
-			"[お届け先]住所2": "東京マンション123号",
-			"[お届け先]氏名": "東京都 出得太 様",
-			"[差出人]郵便番号": "7654321",
-			"[差出人]住所1": "大阪府大阪1|2|3|4",
-			"[差出人]住所2": "大阪マンション123号",
-			"[差出人]氏名": "大阪府 出得太"
-		}
-	],
-	"position": {
-		"[お届け先]郵便番号": {
+			"id": "uuid-hogehoge1234",
+			"fieldName": "[お届け先]郵便番号",
+			"sampleData": "1234567",
 			"position": {
 				"x": 45,
 				"y": 10
@@ -52,13 +43,16 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"width": 50,
 				"height": 100
 			},
+			"type": "text",
 			"alignment": "left",
 			"fontSize": 22.9,
-			"space": 7.4,
-			"type": "text",
+			"characterSpacing": 7.4,
 			"lineHeight": 1
 		},
-		"[お届け先]住所1": {
+		{
+			"id": "uuid-hogehoge1235",
+			"fieldName": "[お届け先]住所1",
+			"sampleData": "東京都東京1|2|3|4",
 			"position": {
 				"x": 90,
 				"y": 30
@@ -67,13 +61,16 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"width": 0,
 				"height": 100
 			},
+			"type": "text",
 			"alignment": "center",
 			"fontSize": 9.2,
-			"space": 0,
-			"type": "text",
+			"characterSpacing": 0,
 			"lineHeight": 1
 		},
-		"[お届け先]住所2": {
+		{
+			"id": "uuid-hogehoge1236",
+			"fieldName": "[お届け先]住所2",
+			"sampleData": "東京マンション123号",
 			"position": {
 				"x": 83,
 				"y": 35
@@ -82,13 +79,16 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"width": 0,
 				"height": 100
 			},
+			"type": "text",
 			"alignment": "center",
 			"fontSize": 9.2,
-			"space": 0,
-			"type": "text",
+			"characterSpacing": 0,
 			"lineHeight": 1
 		},
-		"[お届け先]氏名": {
+		{
+			"id": "uuid-hogehoge1237",
+			"fieldName": "[お届け先]氏名",
+			"sampleData": "東京都 出得太 様",
 			"position": {
 				"x": 50,
 				"y": 25
@@ -97,13 +97,16 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"width": 0,
 				"height": 100
 			},
+			"type": "text",
 			"alignment": "left",
 			"fontSize": 20,
-			"space": 0,
-			"type": "text",
+			"characterSpacing": 0,
 			"lineHeight": 1
 		},
-		"[差出人]郵便番号": {
+		{
+			"id": "uuid-hogehoge1238",
+			"fieldName": "[差出人]郵便番号",
+			"sampleData": "7654321",
 			"position": {
 				"x": 6.3,
 				"y": 121.5
@@ -112,13 +115,16 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"width": 50,
 				"height": 100
 			},
+			"type": "text",
 			"alignment": "left",
 			"fontSize": 14.8,
-			"space": 3.6,
-			"type": "text",
+			"characterSpacing": 3.6,
 			"lineHeight": 0
 		},
-		"[差出人]住所1": {
+		{
+			"id": "uuid-hogehoge1239",
+			"fieldName": "[差出人]住所1",
+			"sampleData": "大阪府大阪1|2|3|4",
 			"position": {
 				"x": 29,
 				"y": 50
@@ -127,13 +133,16 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"width": 0,
 				"height": 100
 			},
+			"type": "text",
 			"alignment": "center",
 			"fontSize": 7,
-			"space": 0,
-			"type": "text",
+			"characterSpacing": 0,
 			"lineHeight": 1
 		},
-		"[差出人]住所2": {
+		{
+			"id": "uuid-hogehoge1220",
+			"fieldName": "[差出人]住所2",
+			"sampleData": "大阪マンション123号",
 			"position": {
 				"x": 25,
 				"y": 60
@@ -142,13 +151,16 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"width": 0,
 				"height": 100
 			},
+			"type": "text",
 			"alignment": "center",
 			"fontSize": 7,
-			"space": 0,
-			"type": "text",
+			"characterSpacing": 0,
 			"lineHeight": 1
 		},
-		"[差出人]氏名": {
+		{
+			"id": "uuid-hogehoge1221",
+			"fieldName": "[差出人]氏名",
+			"sampleData": "大阪府 出得太",
 			"position": {
 				"x": 12,
 				"y": 57
@@ -157,24 +169,28 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 				"width": 0,
 				"height": 100
 			},
+			"type": "text",
 			"alignment": "left",
 			"fontSize": 15,
-			"space": 0,
-			"type": "text",
+			"characterSpacing": 0,
 			"lineHeight": 1
 		}
-	},
+	]
+}');
+// 初期化時
+unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
+	"templateName": "",
 	"image": null,
 	"pageSize": {
-		"width": 100,
-		"height": 148
+		"width": 210,
+		"height": 297
 	},
-	"name": "年賀はがき",
-	"fontName": "NotoSansCJKjp"
+	"fontName": "NotoSansCJKjp",
+	"fields": "positions": []
 }');
 ```
 
-##  右サイドバー
+##  右サイドバーメソッド
 
 - activeは最新の変更されたフィールドのIDをfindして点灯させる
 - expandはJavascriptでUIステートとして持つ
@@ -194,6 +210,7 @@ unityInstance.SendMessage('Canvas', 'Add');
 unityInstance.SendMessage('Canvas', 'Change', '{
 	"id": "uuid-hoge-hoge",
 	"fieldName": "[お届け先]電話番号",
+	"sampleData": "08012345678",
 	"position": {
 		"x": 91,
 		"y": 135.5
@@ -202,18 +219,18 @@ unityInstance.SendMessage('Canvas', 'Change', '{
 		"width": 95,
 		"height": 95
 	},
+	"type": "text",
 	"alignment": "left",
 	"fontSize": 15,
-	"space": 0,
-	"type": "text",
-	"lineHeight": 1,
-	"sampledata": "08000000000"
+	"characterSpacing": 0,
+	"lineHeight": 1
 
 }');
 // type image
 unityInstance.SendMessage('Canvas', 'Change', '{
 	"id": "uuid-foo-bar",
 	"fieldName": "サイン",
+	"sampleData": "base64......",
 	"position": {
 		"x": 91,
 		"y": 135.5
@@ -222,8 +239,7 @@ unityInstance.SendMessage('Canvas', 'Change', '{
 		"width": 95,
 		"height": 95
 	},
-	"type": "image",
-	"sampledata": "base64......"
+	"type": "image"
 }');
 ```
 
@@ -232,7 +248,8 @@ unityから変更があった場合にどのようにくるか
 
 onChangeTemplate( changedTemplateData => {
 // changedTemplateData
-// 	"name": "test template",
+// 	"templateName": "test template",
+//	"image": null,
 // 	"pageSize": {
 // 		"width": 210,
 // 		"height": 297
@@ -240,11 +257,36 @@ onChangeTemplate( changedTemplateData => {
 // 	"fontName": "NotoSansCJKjp"
 })
 
+// type text
+onChangeField( changedFieldData => {
+// changedFieldData
+//  {
+// 	"id": "uuid-foo-bar",
+// 	"fieldName": "customerName",
+// 	"sampleData": "john"
+// 	"position": {
+// 		"x": 91,
+// 		"y": 135.5
+// 	},
+// 	"size": {
+// 		"width": 95,
+// 		"height": 95
+// 	},
+//	"type": "text",
+//	"alignment": "left",
+//	"fontSize": 15,
+//	"characterSpacing": 0,
+//	"lineHeight": 1
+// }
+})
+
+// type image
 onChangeField( changedFieldData => {
 // changedFieldData
 //  {
 // 	"id": "uuid-foo-bar",
 // 	"fieldName": "サイン",
+// 	"sampleData": "base64......"
 // 	"position": {
 // 		"x": 91,
 // 		"y": 135.5
@@ -254,7 +296,6 @@ onChangeField( changedFieldData => {
 // 		"height": 95
 // 	},
 // 	"type": "image",
-// 	"sampledata": "base64......"
 // }
 })
 ```
