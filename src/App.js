@@ -81,6 +81,7 @@ const FieldActions = () => (
   </span>
 );
 
+/* TODO typeが画像の場合 */
 const Field = () => (
   <>
     <PanelWithAction head="FieldName" action={<FieldActions></FieldActions>}>
