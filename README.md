@@ -13,7 +13,7 @@
 
 [unityのマニュアル](https://docs.unity3d.com/Manual/webgl-interactingwithbrowserscripting.html?_ga=2.4361331.1983438053.1569153378-60467206.1569153378)
 
-![](https://github.com/hand-dot/labelmake.jp/blob/master/design/template-editor.png)
+![](https://github.com/hand-dot/template-editor/blob/master/design/template-editor.png)
 
 ## 左サイドバーのメソッド
 
