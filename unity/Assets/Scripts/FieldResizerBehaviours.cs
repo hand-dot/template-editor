@@ -9,12 +9,12 @@ public class FieldResizerBehaviours : MonoBehaviour, IPointerDownHandler, IPoint
 {
     public bool IsPointerDown { get; set; }
     public Vector3 mouseOffset = Vector3.zero;
-    public GameObject canvas;
-    public GameObject wrapperObject;
+    public GameObject reactiveInputField;
 
     // Start is called before the first frame update
     void Start()
     {
+        reactiveInputField = transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -27,8 +27,8 @@ public class FieldResizerBehaviours : MonoBehaviour, IPointerDownHandler, IPoint
         if (IsPointerDown)
         {
 
-            wrapperObject.GetComponent<RectTransform>().sizeDelta =
-                wrapperObject.CalculateSizeDelta(Input.mousePosition, mouseOffset);
+            reactiveInputField.GetComponent<RectTransform>().sizeDelta =
+                reactiveInputField.CalculateSizeDelta(Input.mousePosition, mouseOffset);
         }
     }
     public void OnPointerDown(PointerEventData eventData)

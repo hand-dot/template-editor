@@ -9,6 +9,7 @@ public class CanvasBehaviours : MonoBehaviour
 {
     [DllImport("__Internal")]
     public static extern void Log(string n);
+    public GameObject reactiveInputPrefab;
     public List<Texture2D> mouseTextures;
     private bool IsGrabbingActive { get; set; }
     private Vector3 grabbingStartPos;
@@ -23,6 +24,8 @@ public class CanvasBehaviours : MonoBehaviour
     {
         // Initialize the cursor
         Cursor.SetCursor(FlipTexture(mouseTextures[0], false), new Vector2(10, 10), CursorMode.Auto);
+
+        OnCreateElement();
     }
 
     // Update is called once per frame
@@ -56,6 +59,12 @@ public class CanvasBehaviours : MonoBehaviour
         {
             grabbingStartPos = Input.mousePosition;
         }
+    }
+
+    public void OnCreateElement()
+    {
+        //var obj = Instantiate(reactiveInputPrefab, Vector3.zero, Quaternion.identity);
+        //obj.transform.parent = transform;
     }
 
     public void SetGrabCanvas()
