@@ -1,6 +1,166 @@
 import React, { Component } from "react";
 import "./App.css";
 
+// TODO 下記のデータをLeftSidebar,RightSidebarに入れて動的にしていく
+
+const templateData = {
+  templateName: "年賀はがき",
+  image: null,
+  pageSize: {
+    width: 100,
+    height: 148
+  },
+  fontName: "NotoSansCJKjp",
+  // これはまだアイデアだが、fontUriを持ってもいいかもしれない
+  // "fontUri": "https://labelmake3.firebaseapp.com/pdfmake/vfs_fonts.js"
+  fields: [
+    {
+      id: "uuid-hogehoge1234",
+      fieldName: "[お届け先]郵便番号",
+      sampleData: "1234567",
+      position: {
+        x: 45,
+        y: 10
+      },
+      size: {
+        width: 50,
+        height: 100
+      },
+      type: "text",
+      alignment: "left",
+      fontSize: 22.9,
+      characterSpacing: 7.4,
+      lineHeight: 1
+    },
+    {
+      id: "uuid-hogehoge1235",
+      fieldName: "[お届け先]住所1",
+      sampleData: "東京都東京1|2|3|4",
+      position: {
+        x: 90,
+        y: 30
+      },
+      size: {
+        width: 0,
+        height: 100
+      },
+      type: "text",
+      alignment: "center",
+      fontSize: 9.2,
+      characterSpacing: 0,
+      lineHeight: 1
+    },
+    {
+      id: "uuid-hogehoge1236",
+      fieldName: "[お届け先]住所2",
+      sampleData: "東京マンション123号",
+      position: {
+        x: 83,
+        y: 35
+      },
+      size: {
+        width: 0,
+        height: 100
+      },
+      type: "text",
+      alignment: "center",
+      fontSize: 9.2,
+      characterSpacing: 0,
+      lineHeight: 1
+    },
+    {
+      id: "uuid-hogehoge1237",
+      fieldName: "[お届け先]氏名",
+      sampleData: "東京都 出得太 様",
+      position: {
+        x: 50,
+        y: 25
+      },
+      size: {
+        width: 0,
+        height: 100
+      },
+      type: "text",
+      alignment: "left",
+      fontSize: 20,
+      characterSpacing: 0,
+      lineHeight: 1
+    },
+    {
+      id: "uuid-hogehoge1238",
+      fieldName: "[差出人]郵便番号",
+      sampleData: "7654321",
+      position: {
+        x: 6.3,
+        y: 121.5
+      },
+      size: {
+        width: 50,
+        height: 100
+      },
+      type: "text",
+      alignment: "left",
+      fontSize: 14.8,
+      characterSpacing: 3.6,
+      lineHeight: 0
+    },
+    {
+      id: "uuid-hogehoge1239",
+      fieldName: "[差出人]住所1",
+      sampleData: "大阪府大阪1|2|3|4",
+      position: {
+        x: 29,
+        y: 50
+      },
+      size: {
+        width: 0,
+        height: 100
+      },
+      type: "text",
+      alignment: "center",
+      fontSize: 7,
+      characterSpacing: 0,
+      lineHeight: 1
+    },
+    {
+      id: "uuid-hogehoge1220",
+      fieldName: "[差出人]住所2",
+      sampleData: "大阪マンション123号",
+      position: {
+        x: 25,
+        y: 60
+      },
+      size: {
+        width: 0,
+        height: 100
+      },
+      type: "text",
+      alignment: "center",
+      fontSize: 7,
+      characterSpacing: 0,
+      lineHeight: 1
+    },
+    {
+      id: "uuid-hogehoge1221",
+      fieldName: "[差出人]氏名",
+      sampleData: "大阪府 出得太",
+      position: {
+        x: 12,
+        y: 57
+      },
+      size: {
+        width: 0,
+        height: 100
+      },
+      type: "text",
+      alignment: "left",
+      fontSize: 15,
+      characterSpacing: 0,
+      lineHeight: 1
+    }
+  ]
+};
+
 const sidebarStyle = option =>
   Object.assign(option, {
     position: "absolute",
@@ -81,34 +241,42 @@ const FieldActions = () => (
   </span>
 );
 
-/* TODO typeが画像の場合 */
-const Field = () => (
+const FieldName = () => (
+  <PanelWithAction head="FieldName" action={<FieldActions></FieldActions>}>
+    <input style={inputStyle()}></input>
+  </PanelWithAction>
+);
+
+const FieldPositionAndSize = () => (
+  <Panel head="Position&Size">
+    <div>
+      <label>X:</label>
+      <input type="number" style={miniInputStyle()}></input>
+      <label>H:</label>
+      <input type="number" style={miniInputStyle()}></input>
+    </div>
+    <div>
+      <label>Y:</label>
+      <input type="number" style={miniInputStyle()}></input>
+      <label>W:</label>
+      <input type="number" style={miniInputStyle()}></input>
+    </div>
+  </Panel>
+);
+
+const FieldType = () => (
+  <Panel head="Type">
+    <div>
+      <select>
+        <option>Text</option>
+        <option>Image</option>
+      </select>
+    </div>
+  </Panel>
+);
+
+const TextMeta = () => (
   <>
-    <PanelWithAction head="FieldName" action={<FieldActions></FieldActions>}>
-      <input style={inputStyle()}></input>
-    </PanelWithAction>
-    <Panel head="Position&Size">
-      <div>
-        <label>X:</label>
-        <input type="number" style={miniInputStyle()}></input>
-        <label>H:</label>
-        <input type="number" style={miniInputStyle()}></input>
-      </div>
-      <div>
-        <label>Y:</label>
-        <input type="number" style={miniInputStyle()}></input>
-        <label>W:</label>
-        <input type="number" style={miniInputStyle()}></input>
-      </div>
-    </Panel>
-    <Panel head="Type">
-      <div>
-        <select>
-          <option>Text</option>
-          <option>Image</option>
-        </select>
-      </div>
-    </Panel>
     <Panel head="FontSize(pt)">
       <input type="number" style={miniInputStyle()}></input>
     </Panel>
@@ -122,9 +290,22 @@ const Field = () => (
         <option>Right</option>
       </select>
     </Panel>
-    <Panel head="SampleData">
-      <input style={inputStyle()}></input>
-    </Panel>
+  </>
+);
+
+const FieldSampleData = () => (
+  <Panel head="SampleData">
+    <input style={inputStyle()}></input>
+  </Panel>
+);
+
+const Field = () => (
+  <>
+    <FieldName></FieldName>
+    <FieldPositionAndSize></FieldPositionAndSize>
+    <FieldType></FieldType>
+    <TextMeta></TextMeta>
+    <FieldSampleData></FieldSampleData>
   </>
 );
 
