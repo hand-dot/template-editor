@@ -11,7 +11,7 @@
 
 ---
 
-[unityのマニュアル](https://docs.unity3d.com/Manual/webgl-interactingwithbrowserscripting.html?_ga=2.4361331.1983438053.1569153378-60467206.1569153378)
+[unity のマニュアル](https://docs.unity3d.com/Manual/webgl-interactingwithbrowserscripting.html?_ga=2.4361331.1983438053.1569153378-60467206.1569153378)
 
 ![](https://github.com/hand-dot/template-editor/blob/master/design/template-editor.png)
 
@@ -30,9 +30,9 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 		"height": 148
 	},
 	"fontName": "NotoSansCJKjp",
-	// これはまだアイデアだが、fontUriを持ってもいいかもしれない 
+	// これはまだアイデアだが、fontUriを持ってもいいかもしれない
 	// "fontUri": "https://labelmake3.firebaseapp.com/pdfmake/vfs_fonts.js"
-	"fields": "positions": [
+	"fields":  [
 		{
 			"id": "uuid-hogehoge1234",
 			"fieldName": "[お届け先]郵便番号",
@@ -188,22 +188,19 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 		"height": 297
 	},
 	"fontName": "NotoSansCJKjp",
-	"fields": "positions": []
+	"fields":  []
 }');
 ```
 
-##  右サイドバーメソッド
+## 右サイドバーメソッド
 
-- activeは最新の変更されたフィールドのIDをfindして点灯させる
-- expandはJavascriptでUIステートとして持つ
-- grabは最終的にpositionsの配列の並び順となるのでUIステートとして持つ
-  
-  　
-  
-- removeは消して欲しいフィールドのIDを送る
-- addは引数なし
-- changeは変えたい情報を送る
+- active は最新の変更されたフィールドの ID を find して点灯させる
+- expand は Javascript で UI ステートとして持つ
+- grab は最終的に positions の配列の並び順となるので UI ステートとして持つ
 
+- remove は消して欲しいフィールドの ID を送る
+- add は引数なし
+- change は変えたい情報を送る
 
 ```
 unityInstance.SendMessage('Canvas', 'Remove', 'uuid-hoge-hoge');
