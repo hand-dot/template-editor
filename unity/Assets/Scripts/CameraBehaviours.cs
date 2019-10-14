@@ -20,7 +20,7 @@ public class CameraBehaviours : MonoBehaviour
 
 public static class CameraBehavioursExtension
 {
-    public static void MoveCamera(this Camera camera, Vector3 target, float speed)
+    public static void MoveCamera(this Camera camera, Vector3 target, float speed = 999999999f)
     {
         camera.transform.position = Vector3.MoveTowards(camera.transform.position, camera.transform.position + target, speed * Time.deltaTime);
     }

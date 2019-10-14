@@ -22,7 +22,7 @@ public class CanvasBehaviours : MonoBehaviour
     private void Start()
     {
         // Initialize the cursor
-        Cursor.SetCursor(FlipTexture(mouseTextures[0], false), Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(FlipTexture(mouseTextures[0], false), new Vector2(10, 10), CursorMode.Auto);
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class CanvasBehaviours : MonoBehaviour
     {
         if (Math.Abs(Input.mouseScrollDelta.y) > 0.001)
         {
-            float scale = 3.0f;
+            float scale = 10.0f;
             float lowerLimit = 100f;
             float upperLimit = 1500f;
             Camera.main.ResizeCamera(Input.mouseScrollDelta, scale, upperLimit, lowerLimit);
@@ -49,7 +49,7 @@ public class CanvasBehaviours : MonoBehaviour
         {
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 grabbingStartWorldPos = Camera.main.ScreenToWorldPoint(grabbingStartPos);
-            Camera.main.MoveCamera(grabbingStartWorldPos - mouseWorldPos, 1000f);
+            Camera.main.MoveCamera(grabbingStartWorldPos - mouseWorldPos);
             grabbingStartPos = Input.mousePosition;
         }
         else
@@ -61,9 +61,8 @@ public class CanvasBehaviours : MonoBehaviour
     public void SetGrabCanvas()
     {
         IsGrabbingActive = !IsGrabbingActive;
-        if (!IsGrabbingActive) { Cursor.SetCursor(FlipTexture(mouseTextures[0], false), Vector2.zero, CursorMode.Auto); }
-        else { Cursor.SetCursor(FlipTexture(mouseTextures[1], false), Vector2.zero, CursorMode.Auto); }
-        //Log("Ciao Mondo");
+        if (!IsGrabbingActive) { Cursor.SetCursor(FlipTexture(mouseTextures[0], false), new Vector2(10, 10), CursorMode.Auto); }
+        else { Cursor.SetCursor(FlipTexture(mouseTextures[1], false), new Vector2(10, 10), CursorMode.Auto); }
     }
 
 
