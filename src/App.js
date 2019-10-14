@@ -50,11 +50,11 @@ const LeftSidebar = () => (
     <Panel head="Size">
       <div>
         <label>H:</label>
-        <input style={miniInputStyle()}></input>
+        <input type="number" style={miniInputStyle()}></input>
       </div>
       <div>
         <label>W:</label>
-        <input style={miniInputStyle()}></input>
+        <input type="number" style={miniInputStyle()}></input>
       </div>
     </Panel>
     <Panel head="Font">
@@ -90,15 +90,15 @@ const Field = () => (
     <Panel head="Position&Size">
       <div>
         <label>X:</label>
-        <input style={miniInputStyle()}></input>
+        <input type="number" style={miniInputStyle()}></input>
         <label>H:</label>
-        <input style={miniInputStyle()}></input>
+        <input type="number" style={miniInputStyle()}></input>
       </div>
       <div>
         <label>Y:</label>
-        <input style={miniInputStyle()}></input>
+        <input type="number" style={miniInputStyle()}></input>
         <label>W:</label>
-        <input style={miniInputStyle()}></input>
+        <input type="number" style={miniInputStyle()}></input>
       </div>
     </Panel>
     <Panel head="Type">
@@ -110,12 +110,12 @@ const Field = () => (
       </div>
     </Panel>
     <Panel head="FontSize(pt)">
-      <input style={inputStyle()}></input>
-    </Panel>
-    <Panel head="Alignment">
-      <input style={inputStyle()}></input>
+      <input type="number" style={miniInputStyle()}></input>
     </Panel>
     <Panel head="LineHeight(em)">
+      <input type="number" style={miniInputStyle()}></input>
+    </Panel>
+    <Panel head="Alignment">
       <select>
         <option>Left</option>
         <option>Center</option>
