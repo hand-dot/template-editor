@@ -1,3 +1,4 @@
+
 # 起動
 
 `yarn start`
@@ -15,6 +16,27 @@
 
 ![](https://github.com/hand-dot/template-editor/blob/master/design/template-editor.png)
 
+
+# 開発環境の構築
+
+## Visual Studio IDEのインストール
+
+
+- [Communityエディションを入手して](https://visualstudio.microsoft.com/ja/downloads/)、インストールしてください。[詳細はこちら](https://docs.microsoft.com/ja-jp/visualstudio/mac/setup-vsmac-tools-unity?view=vsmac-2019)
+- 次にユニティハブをインストールしてください。[ダウンロードはこちら](https://unity3d.com/get-unity/download)
+
+- 下記の通りにゲームエンジンをインストールしてください
+<img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-engine1.png" width="420">
+
+<img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-engine2.png" width="420">
+
+- インストール完了後にプロジェクトを追加しUnityを起動します
+<img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-add1.png" width="420">
+
+<img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-add2.png" width="420">
+
+<img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-add3.png" width="420">
+
 ## 左サイドバーのメソッド
 
 ```
@@ -22,7 +44,7 @@ unityInstance.SendMessage('Canvas', 'DownloadTemplate');
 unityInstance.SendMessage('Canvas', 'ImportImage', 'base64......');
 // ImportTemplateは初期化時にも使用される
 // 既存のテンプレートを読み込んだ場合
-unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
+unityInstance.SendMessage('Canvas', 'ChangeTemplate', '{
 	"templateName": "年賀はがき",
 	"image": null,
 	"pageSize": {
@@ -180,7 +202,7 @@ unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
 	]
 }');
 // 初期化時
-unityInstance.SendMessage('Canvas', 'ImportTemplate', '{
+unityInstance.SendMessage('Canvas', 'ChangeTemplate', '{
 	"templateName": "",
 	"image": null,
 	"pageSize": {
