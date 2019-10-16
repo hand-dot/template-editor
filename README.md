@@ -37,6 +37,10 @@
 
 <img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-add3.png" width="420">
 
+## Unityのビルド
+
+メニューから ファイル -> ビルドの設定 -> ビルドを押下します
+
 ## 左サイドバーのメソッド
 
 ```
