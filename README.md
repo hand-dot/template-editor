@@ -1,4 +1,3 @@
-
 # 起動
 
 `yarn start`
@@ -14,30 +13,28 @@
 
 [unity のマニュアル](https://docs.unity3d.com/Manual/webgl-interactingwithbrowserscripting.html?_ga=2.4361331.1983438053.1569153378-60467206.1569153378)
 
-![](https://github.com/hand-dot/template-editor/blob/master/design/template-editor.png)
-
+![](https://github.com/hand-dot/template-editor/blob/master/app/design/template-editor.png)
 
 # 開発環境の構築
 
-## Visual Studio IDEのインストール
+## Visual Studio IDE のインストール
 
-
-- [Communityエディションを入手して](https://visualstudio.microsoft.com/ja/downloads/)、インストールしてください。[詳細はこちら](https://docs.microsoft.com/ja-jp/visualstudio/mac/setup-vsmac-tools-unity?view=vsmac-2019)
+- [Community エディションを入手して](https://visualstudio.microsoft.com/ja/downloads/)、インストールしてください。[詳細はこちら](https://docs.microsoft.com/ja-jp/visualstudio/mac/setup-vsmac-tools-unity?view=vsmac-2019)
 - 次にユニティハブをインストールしてください。[ダウンロードはこちら](https://unity3d.com/get-unity/download)
 
 - 下記の通りにゲームエンジンをインストールしてください
-<img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-engine1.png" width="420">
+  ![](https://github.com/hand-dot/template-editor/blob/master/design/readme/unity-hub-engine1.png)
 
-<img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-engine2.png" width="420">
+![](https://github.com/hand-dot/template-editor/blob/master/design/readme/unity-hub-engine2.png)
 
-- インストール完了後にプロジェクトを追加しUnityを起動します
-<img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-add1.png" width="420">
+- インストール完了後にプロジェクトを追加し Unity を起動します
+  ![](https://github.com/hand-dot/template-editor/blob/master/design/readme/unity-hub-add1.png)
 
-<img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-add2.png" width="420">
+![](https://github.com/hand-dot/template-editor/blob/master/design/readme/unity-hub-add2.png)
 
-<img src="https://github.com/hand-dot/template-editor/blob/master/design/unity-hub-add3.png" width="420">
+![](https://github.com/hand-dot/template-editor/blob/master/design/readme/unity-hub-add3.png)
 
-## Unityのビルド
+## Unity のビルド
 
 メニューから ファイル -> ビルドの設定 -> ビルドを押下します
 
