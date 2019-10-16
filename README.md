@@ -13,7 +13,7 @@
 
 [unity のマニュアル](https://docs.unity3d.com/Manual/webgl-interactingwithbrowserscripting.html?_ga=2.4361331.1983438053.1569153378-60467206.1569153378)
 
-![](https://github.com/hand-dot/template-editor/blob/master/app/design/template-editor.png)
+![](https://github.com/hand-dot/template-editor/blob/master/design/readme/template-editor.png)
 
 # 開発環境の構築
 
