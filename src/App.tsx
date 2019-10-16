@@ -161,7 +161,7 @@ const templateData = {
   ]
 };
 
-const sidebarStyle = option =>
+const sidebarStyle = (option: any) =>
   Object.assign(option, {
     position: "absolute",
     zIndex: 1,
@@ -178,10 +178,10 @@ const inputStyle = () => ({
 
 const miniInputStyle = () => Object.assign({ maxWidth: 50 }, inputStyle());
 
-const Panel = ({ head, children }) =>
+const Panel = ({ head, children }: any) =>
   PanelWithAction({ head, action: null, children });
 
-const PanelWithAction = ({ head, action, children }) => (
+const PanelWithAction = ({ head, action, children }: any) => (
   <div style={{ border: "1px solid #000", marginBottom: 1, color: "#fff" }}>
     <div
       style={{
@@ -320,10 +320,10 @@ const RightSidebar = () => (
 
 class App extends Component {
   componentDidMount() {
-    var gameInstance = window.UnityLoader.instantiate(
+    var gameInstance: any = (globalThis as any).UnityLoader.instantiate(
       "gameContainer",
       "Build/public.json",
-      { onProgress: window.UnityProgress }
+      { onProgress: (globalThis as any).UnityProgress }
     );
 
     console.log(gameInstance);
