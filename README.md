@@ -27,6 +27,8 @@
 
 ![](https://github.com/hand-dot/template-editor/blob/master/design/readme/unity-hub-engine2.png)
 
+![](https://github.com/hand-dot/template-editor/blob/master/design/readme/unity-hub-engine3.png)
+
 - インストール完了後にプロジェクトを追加し Unity を起動します
   ![](https://github.com/hand-dot/template-editor/blob/master/design/readme/unity-hub-add1.png)
 
