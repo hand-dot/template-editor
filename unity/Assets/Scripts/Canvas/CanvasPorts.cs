@@ -14,6 +14,6 @@ public partial class CanvasBehaviours : MonoBehaviour
 
     public void OnChange(string jsonData)
     {
-        var result = JsonConvert.DeserializeObject<T>(json);
+        //var result = JsonConvert.DeserializeObject<T>(json);
     }
 }
