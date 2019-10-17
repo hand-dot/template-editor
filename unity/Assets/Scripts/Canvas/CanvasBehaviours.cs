@@ -5,13 +5,14 @@ using System.Runtime.InteropServices;
 using System;
 using UnityEngine.EventSystems;
 
-public class CanvasBehaviours : MonoBehaviour
+public partial class CanvasBehaviours : MonoBehaviour
 {
     [DllImport("__Internal")]
     public static extern void Log(string n);
     public GameObject reactiveInputPrefab;
     public List<Texture2D> mouseTextures;
     private bool IsGrabbingActive { get; set; }
+
     private Vector3 grabbingStartPos;
     enum MouseButton
     {
