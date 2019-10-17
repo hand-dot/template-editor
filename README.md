@@ -1,10 +1,13 @@
+![](https://github.com/hand-dot/template-editor/blob/master/design/readme/template-editor.png)
+
+
 # 起動
 
 `yarn start`
 
 # Unity のコードを反映するには
 
-下記のディレクトリをください
+下記のディレクトリを配置してください
 
 - `public/Build`
 - `public/TemplateData`
@@ -12,8 +15,6 @@
 ---
 
 [unity のマニュアル](https://docs.unity3d.com/Manual/webgl-interactingwithbrowserscripting.html?_ga=2.4361331.1983438053.1569153378-60467206.1569153378)
-
-![](https://github.com/hand-dot/template-editor/blob/master/design/readme/template-editor.png)
 
 # 開発環境の構築
 
