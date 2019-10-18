@@ -455,14 +455,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 808916815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee9212fd325dd4476b11193102496079, type: 3}
+  m_Script: {fileID: 11500000, guid: 26f606ec7d98f43fbb6e26bd9bec005e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   reactiveInputPrefab: {fileID: 5413304844738761037, guid: f8eef2a54663545269446ca68da0fda8,
     type: 3}
   mouseTextures:
-  - {fileID: 2800000, guid: 9ea5538ca80c0404cb4842a25d09ef66, type: 3}
-  - {fileID: 2800000, guid: 3a173a064254e754da0a1c68e4e88b1a, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1129789459
 GameObject:
   m_ObjectHideFlags: 0

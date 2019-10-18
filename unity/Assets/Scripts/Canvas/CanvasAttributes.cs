@@ -5,8 +5,7 @@ using Newtonsoft.Json;
 
 public partial class CanvasBehaviours : MonoBehaviour
 {
-    private Template template;
-
+    private Template ActiveTemplate { get; set; }
 
 }
 
@@ -14,23 +13,21 @@ public partial class CanvasBehaviours : MonoBehaviour
 class Template
 {
     [JsonProperty("templateName")]
-    private string TemplateName { get; set; } = "";
+    public string TemplateName { get; set; } = "";
     [JsonProperty("image")]
-    private string Image { get; set; } = "";
+    public string Image { get; set; } = "";
     [JsonProperty("fontName")]
-    private string FontName { get; set; } = "NotoSansCJKjp";
+    public string FontName { get; set; } = "NotoSansCJKjp";
     [JsonProperty("pageSize")]
-    private PageSize PageSizeInstance { get; set; } = new PageSize();
-
-    [JsonObject("pageSize")]
-    public class PageSize
-    {
-        [JsonProperty("width")]
-        private int Width { get; set; } = 210;
-        [JsonProperty("height")]
-        private int Height { get; set; } = 297;
-    }
+    public PageSize PageSize { get; set; } = new PageSize();
 }
 
-
+[JsonObject("pageSize")]
+class PageSize
+{
+    [JsonProperty("width")]
+    public int Width { get; set; } = 210;
+    [JsonProperty("height")]
+    public int Height { get; set; } = 297;
+}
 

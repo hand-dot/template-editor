@@ -12,8 +12,8 @@ public partial class CanvasBehaviours : MonoBehaviour
     public static extern void Change(string jsonData);
 
 
-    public void OnChange(string jsonData)
+    public void OnTemplateChange(string json)
     {
-        //var result = JsonConvert.DeserializeObject<T>(json);
+        ActiveTemplate = JsonConvert.DeserializeObject<Template>(json);
     }
 }

@@ -21,8 +21,10 @@ public partial class CanvasBehaviours : MonoBehaviour
 
     private void Start()
     {
-        // Initialize the cursor
-        Cursor.SetCursor(FlipTexture(mouseTextures[0], false), new Vector2(10, 10), CursorMode.Auto);
+        //Initialize the cursor
+        //Cursor.SetCursor(FlipTexture(mouseTextures[0], false), new Vector2(10, 10), CursorMode.Auto);
+
+        OnTemplateChange("{\"templateName\": \"\",\"image\": null,\"pageSize\": {\"width\": 210,\"height\": 297},\"fontName\": \"NotoSansCJKjp\",\"fields\":  []}");
     }
 
     // Update is called once per frame
@@ -67,8 +69,8 @@ public partial class CanvasBehaviours : MonoBehaviour
     public void SetGrabCanvas()
     {
         IsGrabbingActive = !IsGrabbingActive;
-        if (!IsGrabbingActive) { Cursor.SetCursor(FlipTexture(mouseTextures[0], false), new Vector2(10, 10), CursorMode.Auto); }
-        else { Cursor.SetCursor(FlipTexture(mouseTextures[1], false), new Vector2(10, 10), CursorMode.Auto); }
+        //if (!IsGrabbingActive) { Cursor.SetCursor(FlipTexture(mouseTextures[0], false), new Vector2(10, 10), CursorMode.Auto); }
+        //else { Cursor.SetCursor(FlipTexture(mouseTextures[1], false), new Vector2(10, 10), CursorMode.Auto); }
     }
 
 
