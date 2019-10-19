@@ -16,5 +16,10 @@ if [ $? -eq 1 ]; then
     echo "error!! check logfile: ${UNITY_LOG_PATH}"
     exit 1
 fi
+
+mv -f unity/WebGL-Dist/Build public/Build
+mv -f unity/WebGL-Dist/TemplateData public/TemplateData
+rm -rf unity/WebGL-Dist
+
 echo "success!!"
 exit 0
