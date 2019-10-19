@@ -45,9 +45,9 @@ public partial class CanvasBehaviours : MonoBehaviour
     {
         if (Math.Abs(Input.mouseScrollDelta.y) > 0.001)
         {
-            float scale = 10.0f;
-            float lowerLimit = 100f;
-            float upperLimit = 1500f;
+            float scale = 50.0f;
+            float lowerLimit = 500f;
+            float upperLimit = 3000f;
             Camera.main.ResizeCamera(Input.mouseScrollDelta, scale, upperLimit, lowerLimit);
         }
     }
