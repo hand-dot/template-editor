@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;
+
 
 public partial class CanvasBehaviours : MonoBehaviour
 {
@@ -9,25 +9,19 @@ public partial class CanvasBehaviours : MonoBehaviour
 
 }
 
-[JsonObject("template")]
+[System.Serializable]
 class Template
-{
-    [JsonProperty("templateName")]
-    public string TemplateName { get; set; } = "";
-    [JsonProperty("image")]
-    public string Image { get; set; } = "";
-    [JsonProperty("fontName")]
-    public string FontName { get; set; } = "NotoSansCJKjp";
-    [JsonProperty("pageSize")]
-    public PageSize PageSize { get; set; } = new PageSize();
+{ 
+    public string templateName { get; set; } = "";
+    public string image { get; set; } = "";
+    public string fontName { get; set; } = "NotoSansCJKjp";
+    public PageSize pageSize { get; set; } = new PageSize();
 }
 
-[JsonObject("pageSize")]
+[System.Serializable]
 class PageSize
 {
-    [JsonProperty("width")]
-    public int Width { get; set; } = 210;
-    [JsonProperty("height")]
-    public int Height { get; set; } = 297;
+    public int width { get; set; } = 210;
+    public int height { get; set; } = 297;
 }
 
