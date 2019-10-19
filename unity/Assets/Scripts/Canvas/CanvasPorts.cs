@@ -9,11 +9,12 @@ using Newtonsoft.Json;
 public partial class CanvasBehaviours : MonoBehaviour
 {
     [DllImport("__Internal")]
-    public static extern void Change(string jsonData);
+    public static extern void OnChangeTemplate(string jsonData);
 
 
-    public void OnTemplateChange(string json)
+    public void ChangeTemplate(string json)
     {
         ActiveTemplate = JsonConvert.DeserializeObject<Template>(json);
+        OnChangeTemplate(JsonConvert.SerializeObject(ActiveTemplate));
     }
 }

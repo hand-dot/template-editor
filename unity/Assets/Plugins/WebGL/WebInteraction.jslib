@@ -1,6 +1,6 @@
 var WebInteraction = {
-  Log: function(str) {
-    window.alert(Pointer_stringify(str))
-  },
+  OnChangeTemplate: function(str) {
+    window.WebInteraction.onChangeTemplate(Pointer_stringify(str));
+  }
 }
 mergeInto(LibraryManager.library, WebInteraction);
