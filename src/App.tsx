@@ -204,26 +204,26 @@ const PanelWithAction = ({ head, action, children }: any) => (
 
 const LeftSidebar = () => (
   <div style={sidebarStyle({ left: 0 })}>
-    <Panel head="Template Name">
+    <Panel head='Template Name'>
       <input style={inputStyle()} />
     </Panel>
-    <Panel head="Size">
+    <Panel head='Size'>
       <div>
         <label>H:</label>
-        <input type="number" style={miniInputStyle()} />
+        <input type='number' style={miniInputStyle()} />
       </div>
       <div>
         <label>W:</label>
-        <input type="number" style={miniInputStyle()} />
+        <input type='number' style={miniInputStyle()} />
       </div>
     </Panel>
-    <Panel head="Font">
+    <Panel head='Font'>
       <select>
         <option>Serif</option>
         <option>Sans-serif</option>
       </select>
     </Panel>
-    <Panel head="Action">
+    <Panel head='Action'>
       <button style={{ display: 'block', marginBottom: 10 }}>
         Dowload Template
       </button>
@@ -236,36 +236,36 @@ const LeftSidebar = () => (
 );
 
 const FieldActions = () => (
-  <span style={{ fontSize: 'small' }} role="img" aria-label="actions">
+  <span style={{ fontSize: 'small' }} role='img' aria-label='actions'>
     🔴 🔽 🖐🏻 🗑
   </span>
 );
 
 const FieldName = () => (
-  <PanelWithAction head="FieldName" action={<FieldActions />}>
+  <PanelWithAction head='FieldName' action={<FieldActions />}>
     <input style={inputStyle()} />
   </PanelWithAction>
 );
 
 const FieldPositionAndSize = () => (
-  <Panel head="Position&Size">
+  <Panel head='Position&Size'>
     <div>
       <label>X:</label>
-      <input type="number" style={miniInputStyle()} />
+      <input type='number' style={miniInputStyle()} />
       <label>H:</label>
-      <input type="number" style={miniInputStyle()} />
+      <input type='number' style={miniInputStyle()} />
     </div>
     <div>
       <label>Y:</label>
-      <input type="number" style={miniInputStyle()} />
+      <input type='number' style={miniInputStyle()} />
       <label>W:</label>
-      <input type="number" style={miniInputStyle()} />
+      <input type='number' style={miniInputStyle()} />
     </div>
   </Panel>
 );
 
 const FieldType = () => (
-  <Panel head="Type">
+  <Panel head='Type'>
     <div>
       <select>
         <option>Text</option>
@@ -277,13 +277,13 @@ const FieldType = () => (
 
 const TextMeta = () => (
   <>
-    <Panel head="FontSize(pt)">
-      <input type="number" style={miniInputStyle()} />
+    <Panel head='FontSize(pt)'>
+      <input type='number' style={miniInputStyle()} />
     </Panel>
-    <Panel head="LineHeight(em)">
-      <input type="number" style={miniInputStyle()} />
+    <Panel head='LineHeight(em)'>
+      <input type='number' style={miniInputStyle()} />
     </Panel>
-    <Panel head="Alignment">
+    <Panel head='Alignment'>
       <select>
         <option>Left</option>
         <option>Center</option>
@@ -294,7 +294,7 @@ const TextMeta = () => (
 );
 
 const FieldSampleData = () => (
-  <Panel head="SampleData">
+  <Panel head='SampleData'>
     <input style={inputStyle()} />
   </Panel>
 );
@@ -320,36 +320,14 @@ const RightSidebar = () => (
 
 class App extends Component {
   componentDidMount() {
-    const unityInstance = window.globalThis.UnityLoader.instantiate(
-      'gameContainer',
-      'Build/WebGL-Dist.json',
-      { onProgress: window.globalThis.UnityProgress }
-    );
-    setTimeout(() => {
-      console.log('fire!');
-      unityInstance.SendMessage(
-        'Canvas',
-        'ChangeTemplate',
-        JSON.stringify({
-          templateName: '',
-          image: null,
-          pageSize: {
-            width: 210,
-            height: 297,
-          },
-          fontName: 'NotoSansCJKjp',
-          fields: [],
-        })
-      );
-    }, 5000);
-    console.log(unityInstance);
+
   }
   render() {
     return (
       <>
         <LeftSidebar />
         <div
-          id="gameContainer"
+          id='gameContainer'
           style={{
             position: 'absolute',
             zIndex: 0,

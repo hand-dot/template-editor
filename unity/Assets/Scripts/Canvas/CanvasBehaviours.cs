@@ -21,9 +21,17 @@ public partial class CanvasBehaviours : MonoBehaviour
 
     private void Start()
     {
+        try
+        {
+           OnInit();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Front-end not aviablable " + e);
+        }
         //Initialize the cursor
         //Cursor.SetCursor(FlipTexture(mouseTextures[0], false), new Vector2(10, 10), CursorMode.Auto);
-        ChangeTemplate("{\"templateName\": \"\",\"image\": null,\"pageSize\": {\"width\": 210,\"height\": 297},\"fontName\": \"NotoSansCJKjp\",\"fields\":  []}");
+        //ChangeTemplate("{\"templateName\": \"\",\"image\": null,\"pageSize\": {\"width\": 210,\"height\": 297},\"fontName\": \"NotoSansCJKjp\",\"fields\":  []}");
     }
 
     // Update is called once per frame
