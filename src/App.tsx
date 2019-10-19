@@ -322,7 +322,7 @@ class App extends Component {
   componentDidMount() {
     const gameInstance = window.globalThis.UnityLoader.instantiate(
       'gameContainer',
-      'Build/public.json',
+      'Build/WebGL-Dist.json',
       { onProgress: window.globalThis.UnityProgress }
     );
 
