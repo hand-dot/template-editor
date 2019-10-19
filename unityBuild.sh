@@ -17,6 +17,8 @@ if [ $? -eq 1 ]; then
     exit 1
 fi
 
+rm -rf public/Build
+rm -rf public/TemplateData
 mv -f unity/WebGL-Dist/Build public/
 mv -f unity/WebGL-Dist/TemplateData public/
 rm -rf unity/WebGL-Dist
