@@ -43,7 +43,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "sh unityBuild.sh"
+      "pre-push": "sh unityBuild.sh"
     }
   }
 }
