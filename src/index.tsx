@@ -28,7 +28,7 @@ const onChangeTemplate = (value: any, key: string) => {
   if (key === 'template') {
     data = value;
   } else {
-    data = Object.assign(value, { [key]: value });
+    data = { ...value, ...{ [key]: value } };
   }
   console.log('--------------toUnity----------------');
   console.log(data);
@@ -51,7 +51,7 @@ window.WebInteraction = {
 ReactDOM.render(
   <App
     unityInstance={unityInstance}
-    templateData={templateData}
+    templateData={templateData} // FIXME templateData = JSON.parse(json);　で値を変更しても変わらない
     onChangeTemplate={onChangeTemplate}
   ></App>,
   document.getElementById('root')
