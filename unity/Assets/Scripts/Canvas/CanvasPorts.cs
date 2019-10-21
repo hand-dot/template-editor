@@ -26,6 +26,7 @@ public partial class CanvasBehaviours : MonoBehaviour
 #endif
     }
 
+    [System.Serializable]
     private class CanvasFocus
     {
         public bool hasFocus;
