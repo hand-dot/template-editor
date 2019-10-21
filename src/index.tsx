@@ -49,9 +49,7 @@ window.WebInteraction = {
 };
 
 ReactDOM.render(
-
   <App
-    unityInstance={unityInstance}
     templateData={templateData} // FIXME templateData = JSON.parse(json);　で値を変更しても変わらない
     onChangeTemplate={onChangeTemplate}
   />,

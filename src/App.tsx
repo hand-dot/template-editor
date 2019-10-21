@@ -172,7 +172,6 @@ const RightSidebar = () => (
 );
 
 interface Props {
-  unityInstance: any;
   templateData: any;
   onChangeTemplate: any;
 }
