@@ -17,6 +17,19 @@
     <link rel="stylesheet" href="TemplateData/style.css" />
     <script src="TemplateData/UnityProgress.javascript"></script>
     <script src="Build/UnityLoader.js"></script>
+    <script>
+      function UnityProgress(unityInstance, progress) {
+        if (progress == 1.0) {
+          document.addEventListener('click', function(e) {
+            unityInstance.SendMessage(
+              'Canvas',
+              'FocusCanvas',
+              JSON.stringify({ hasFocus: e.target.tagName == 'canvas' })
+            );
+          });
+        }
+      }
+    </script>
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
