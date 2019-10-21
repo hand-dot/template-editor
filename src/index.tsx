@@ -14,8 +14,8 @@ const getInitialTemplateData = () => ({
   templateName: 'test',
   image: null,
   pageSize: {
-    width: 210,
-    height: 297,
+    width: 510,
+    height: 197,
   },
   fontName: 'NotoSansCJKjp',
   fields: [],
@@ -49,11 +49,12 @@ window.WebInteraction = {
 };
 
 ReactDOM.render(
+
   <App
     unityInstance={unityInstance}
     templateData={templateData} // FIXME templateData = JSON.parse(json);　で値を変更しても変わらない
     onChangeTemplate={onChangeTemplate}
-  ></App>,
+  />,
   document.getElementById('root')
 );
 

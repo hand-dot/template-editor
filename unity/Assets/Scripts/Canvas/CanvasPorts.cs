@@ -12,7 +12,6 @@ public partial class CanvasBehaviours : MonoBehaviour
     public void ChangeTemplate(string json)
     {
         ActiveTemplate = JsonUtility.FromJson<Template>(json);
-        Debug.Log(JsonUtility.ToJson(ActiveTemplate));
         OnChangeTemplate(JsonUtility.ToJson(ActiveTemplate));
     }
 }
