@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
+const sidebarWidth = 240;
+
 const sidebarStyle = (option: any) => ({
   ...option,
   position: 'absolute',
   zIndex: 1,
-  width: 240,
+  width: sidebarWidth,
   height: window.innerHeight,
   backgroundColor: '#444',
 });
@@ -25,20 +27,21 @@ const PanelWithAction = ({ head, action, children }: any) => (
   <div style={{ border: '1px solid #000', marginBottom: 1, color: '#fff' }}>
     <div
       style={{
+        fontSize: 'small',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         color: '#fff',
         background: '#333',
         margin: 0,
-        padding: 10,
+        padding: 3,
         borderBottom: '1px solid #000',
       }}
     >
       {head}
       {action && action}
     </div>
-    <div style={{ padding: 10, backgroundColor: '#888' }}>{children}</div>
+    <div style={{ padding: 3, backgroundColor: '#888' }}>{children}</div>
   </div>
 );
 
@@ -177,9 +180,7 @@ interface Props {
 }
 interface State {}
 class App extends Component<Props, State> {
-  componentDidMount() {
-    console.log(this.props.unityInstance, 'componentDidMount');
-  }
+  componentDidMount() {}
   componentDidUpdate() {
     console.log(this.props.templateData, 'componentDidUpdate');
   }
@@ -202,7 +203,8 @@ class App extends Component<Props, State> {
           style={{
             position: 'absolute',
             zIndex: 0,
-            width: window.innerWidth,
+            left: sidebarWidth,
+            width: window.innerWidth - sidebarWidth * 2,
             height: window.innerHeight,
           }}
         />
