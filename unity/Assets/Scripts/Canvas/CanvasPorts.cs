@@ -18,18 +18,18 @@ public partial class CanvasBehaviours : MonoBehaviour
 #endif
     }
 
+
+    [System.Serializable]
+    private class CanvasFocus
+    {
+        public bool hasFocus;
+    }
     public void FocusCanvas(string json)
     {
         CanvasFocus canvas = JsonUtility.FromJson<CanvasFocus>(json);
 #if !UNITY_EDITOR && UNITY_WEBGL
         WebGLInput.captureAllKeyboardInput = canvas.hasFocus;
 #endif
-    }
-
-    [System.Serializable]
-    private class CanvasFocus
-    {
-        public bool hasFocus;
     }
 }
 
