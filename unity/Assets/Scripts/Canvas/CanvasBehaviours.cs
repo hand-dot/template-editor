@@ -23,7 +23,7 @@ public partial class CanvasBehaviours : MonoBehaviour
     {
         try
         {
-           OnInit();
+            OnInit();
         }
         catch (Exception e)
         {
