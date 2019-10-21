@@ -22,7 +22,7 @@ public partial class CanvasBehaviours : MonoBehaviour
     {
         CanvasFocus canvas = JsonUtility.FromJson<CanvasFocus>(json);
 #if !UNITY_EDITOR && UNITY_WEBGL
-        WebGLInput.captureAllKeyboardInput = canvas.hasFocus
+        WebGLInput.captureAllKeyboardInput = canvas.hasFocus;
 #endif
     }
 

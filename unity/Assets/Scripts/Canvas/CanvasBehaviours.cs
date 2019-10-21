@@ -21,14 +21,9 @@ public partial class CanvasBehaviours : MonoBehaviour
 
     private void Start()
     {
-        try
-        {
-            OnInit();
-        }
-        catch (Exception e)
-        {
-            Debug.Log("Front-end not aviablable " + e);
-        }
+#if !UNITY_EDITOR && UNITY_WEBGL
+        OnInit();
+#endif
         //Initialize the cursor
         //Cursor.SetCursor(FlipTexture(mouseTextures[0], false), new Vector2(10, 10), CursorMode.Auto);
         //ChangeTemplate("{\"templateName\": \"template name\",\"image\": null,\"pageSize\": {\"width\": 210,\"height\": 297},\"fontName\": \"NotoSansCJKjp\",\"fields\":  []}");
