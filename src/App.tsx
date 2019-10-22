@@ -57,20 +57,37 @@ const LeftSidebar = ({
       <input
         style={inputStyle()}
         value={templateName}
-        onChange={e => {
-          const value = e.target.value;
-          onChangeTemplate(value, 'templateName');
-        }}
+        onChange={e => onChangeTemplate(e.target.value, 'templateName')}
       />
     </Panel>
     <Panel head="Size">
       <div>
         <label>H:</label>
-        <input type="number" style={miniInputStyle()} />
+        <input
+          type="number"
+          style={miniInputStyle()}
+          value={pageSize.height}
+          onChange={e => {
+            onChangeTemplate(
+              Object.assign(pageSize, { height: +e.target.value }),
+              'pageSize'
+            );
+          }}
+        />
       </div>
       <div>
         <label>W:</label>
-        <input type="number" style={miniInputStyle()} />
+        <input
+          type="number"
+          style={miniInputStyle()}
+          value={pageSize.width}
+          onChange={e => {
+            onChangeTemplate(
+              Object.assign(pageSize, { width: +e.target.value }),
+              'pageSize'
+            );
+          }}
+        />
       </div>
     </Panel>
     <Panel head="Font">

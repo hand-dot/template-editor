@@ -21,25 +21,13 @@ const getInitialTemplateData = () => ({
   fields: [],
 });
 
-const onChangeTemplate = (value: any, key: string) => {
-  let data = {};
-  if (key === 'template') {
-    data = value;
-  } else {
-    data = { ...value, ...{ [key]: value } };
-  }
-  console.log('--------------toUnity----------------');
-  console.log(data);
-  console.log('--------------toUnity----------------');
-  unityInstance.SendMessage('Canvas', 'ChangeTemplate', JSON.stringify(data));
-};
-
 class AppContainer extends Component {
   constructor(props: any) {
     super(props);
+    const self = this;
     window.WebInteraction = {
       onInit() {
-        onChangeTemplate(getInitialTemplateData(), 'template');
+        self.onChangeTemplate(getInitialTemplateData(), 'template');
       },
       onChangeTemplate: json => {
         console.log('=============fromUnity================');
@@ -50,10 +38,25 @@ class AppContainer extends Component {
     };
   }
   state = { templateData: getInitialTemplateData() };
+  onChangeTemplate = (value: any, key: string) => {
+    let data = {};
+    if (key === 'template') {
+      data = value;
+    } else {
+      data = { ...this.state.templateData, ...{ [key]: value } };
+    }
+    console.log('--------------toUnity----------------');
+    console.log(data);
+    console.log('--------------toUnity----------------');
+    unityInstance.SendMessage('Canvas', 'ChangeTemplate', JSON.stringify(data));
+  };
   render() {
     const { templateData } = this.state;
     return (
-      <App templateData={templateData} onChangeTemplate={onChangeTemplate} />
+      <App
+        templateData={templateData}
+        onChangeTemplate={this.onChangeTemplate}
+      />
     );
   }
 }
