@@ -196,8 +196,6 @@ class App extends Component<Props, State> {
           fontName={fontName}
           onChangeTemplate={onChangeTemplate}
         />
-        {/* MEMO: 下記の要素にイベントが取られて正常にイベントハンドラできない */}
-        {/* FIXME: onChangeTemplateを動かす */}
         <div
           id="gameContainer"
           style={{

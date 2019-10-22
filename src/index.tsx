@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
@@ -21,8 +21,6 @@ const getInitialTemplateData = () => ({
   fields: [],
 });
 
-let templateData = getInitialTemplateData();
-
 const onChangeTemplate = (value: any, key: string) => {
   let data = {};
   if (key === 'template') {
@@ -36,25 +34,31 @@ const onChangeTemplate = (value: any, key: string) => {
   unityInstance.SendMessage('Canvas', 'ChangeTemplate', JSON.stringify(data));
 };
 
-window.WebInteraction = {
-  onInit() {
-    onChangeTemplate(getInitialTemplateData(), 'template');
-  },
-  onChangeTemplate: json => {
-    console.log('=============fromUnity================');
-    console.log(json);
-    console.log('=============fromUnity================');
-    templateData = JSON.parse(json);
-  },
-};
+class AppContainer extends Component {
+  constructor(props: any) {
+    super(props);
+    window.WebInteraction = {
+      onInit() {
+        onChangeTemplate(getInitialTemplateData(), 'template');
+      },
+      onChangeTemplate: json => {
+        console.log('=============fromUnity================');
+        console.log(json);
+        console.log('=============fromUnity================');
+        this.setState({ templateData: JSON.parse(json) });
+      },
+    };
+  }
+  state = { templateData: getInitialTemplateData() };
+  render() {
+    const { templateData } = this.state;
+    return (
+      <App templateData={templateData} onChangeTemplate={onChangeTemplate} />
+    );
+  }
+}
 
-ReactDOM.render(
-  <App
-    templateData={templateData} // FIXME templateData = JSON.parse(json);　で値を変更しても変わらない
-    onChangeTemplate={onChangeTemplate}
-  />,
-  document.getElementById('root')
-);
+ReactDOM.render(<AppContainer />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
