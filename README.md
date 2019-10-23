@@ -1,6 +1,5 @@
 ![](https://github.com/hand-dot/template-editor/blob/master/design/readme/template-editor.png)
 
-
 # 起動
 
 `yarn start`
@@ -76,10 +75,12 @@ unityInstance.SendMessage('Canvas', 'ChangeTemplate', '{
 				"height": 100
 			},
 			"type": "text",
-			"alignment": "left",
-			"fontSize": 22.9,
-			"characterSpacing": 7.4,
-			"lineHeight": 1
+			"style": {
+                "alignment": "left",
+                "fontSize": 22.9,
+                "characterSpacing": 7.4,
+                "lineHeight": 1
+            }
 		},
 		{
 			"id": "uuid-hogehoge1235",
@@ -94,10 +95,12 @@ unityInstance.SendMessage('Canvas', 'ChangeTemplate', '{
 				"height": 100
 			},
 			"type": "text",
-			"alignment": "center",
-			"fontSize": 9.2,
-			"characterSpacing": 0,
-			"lineHeight": 1
+			"style": {
+                "alignment": "center",
+                "fontSize": 9.2,
+                "characterSpacing": 0,
+                "lineHeight": 1
+            }
 		},
 		{
 			"id": "uuid-hogehoge1236",
@@ -112,10 +115,12 @@ unityInstance.SendMessage('Canvas', 'ChangeTemplate', '{
 				"height": 100
 			},
 			"type": "text",
-			"alignment": "center",
-			"fontSize": 9.2,
-			"characterSpacing": 0,
-			"lineHeight": 1
+			"style": {
+                "alignment": "center",
+                "fontSize": 9.2,
+                "characterSpacing": 0,
+                "lineHeight": 1
+            }
 		},
 		{
 			"id": "uuid-hogehoge1237",
@@ -130,10 +135,12 @@ unityInstance.SendMessage('Canvas', 'ChangeTemplate', '{
 				"height": 100
 			},
 			"type": "text",
-			"alignment": "left",
-			"fontSize": 20,
-			"characterSpacing": 0,
-			"lineHeight": 1
+			"style": {
+                "alignment": "left",
+                "fontSize": 20,
+                "characterSpacing": 0,
+                "lineHeight": 1
+            }
 		},
 		{
 			"id": "uuid-hogehoge1238",
@@ -148,10 +155,12 @@ unityInstance.SendMessage('Canvas', 'ChangeTemplate', '{
 				"height": 100
 			},
 			"type": "text",
-			"alignment": "left",
-			"fontSize": 14.8,
-			"characterSpacing": 3.6,
-			"lineHeight": 0
+			"style": {
+                "alignment": "left",
+                "fontSize": 14.8,
+                "characterSpacing": 3.6,
+                "lineHeight": 0
+            }
 		},
 		{
 			"id": "uuid-hogehoge1239",
@@ -166,10 +175,12 @@ unityInstance.SendMessage('Canvas', 'ChangeTemplate', '{
 				"height": 100
 			},
 			"type": "text",
-			"alignment": "center",
-			"fontSize": 7,
-			"characterSpacing": 0,
-			"lineHeight": 1
+			"style": {
+                "alignment": "center",
+                "fontSize": 7,
+                "characterSpacing": 0,
+                "lineHeight": 1
+            }
 		},
 		{
 			"id": "uuid-hogehoge1220",
@@ -184,10 +195,12 @@ unityInstance.SendMessage('Canvas', 'ChangeTemplate', '{
 				"height": 100
 			},
 			"type": "text",
-			"alignment": "center",
-			"fontSize": 7,
-			"characterSpacing": 0,
-			"lineHeight": 1
+			"style": {
+                "alignment": "center",
+                "fontSize": 7,
+                "characterSpacing": 0,
+                "lineHeight": 1
+            }
 		},
 		{
 			"id": "uuid-hogehoge1221",
@@ -202,10 +215,12 @@ unityInstance.SendMessage('Canvas', 'ChangeTemplate', '{
 				"height": 100
 			},
 			"type": "text",
-			"alignment": "left",
-			"fontSize": 15,
-			"characterSpacing": 0,
-			"lineHeight": 1
+			"style": {
+                "alignment": "left",
+                "fontSize": 15,
+                "characterSpacing": 0,
+                "lineHeight": 1
+            }
 		}
 	]
 }');
@@ -249,10 +264,12 @@ unityInstance.SendMessage('Canvas', 'Change', '{
 		"height": 95
 	},
 	"type": "text",
-	"alignment": "left",
-	"fontSize": 15,
-	"characterSpacing": 0,
-	"lineHeight": 1
+	"style": {
+		"alignment": "left",
+		"fontSize": 15,
+		"characterSpacing": 0,
+		"lineHeight": 1
+	}
 
 }');
 // type image
