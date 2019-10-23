@@ -309,56 +309,58 @@ unity から変更があった場合にどのようにくるか
 ```js
 onChangeTemplate(changedTemplateData => {
   // changedTemplateData
-  // 	"templateName": "test template",
-  //	"image": null,
-  // 	"pageSize": {
-  // 		"width": 210,
-  // 		"height": 297
-  // 	},
-  // 	"fontName": "NotoSansCJKjp"
+  //   {
+  //     templateName: "test template",
+  //     image: null,
+  //     pageSize: {
+  //       width: 210,
+  //       height: 297
+  //     },
+  //     fontName: "NotoSansCJKjp"
+  //   };
 });
 
 // type text
 onChangeField(changedFieldData => {
   // changedFieldData
-  //  {
-  // 	"id": "uuid-foo-bar",
-  // 	"fieldName": "customerName",
-  // 	"sampleData": "john"
-  // 	"position": {
-  // 		"x": 91,
-  // 		"y": 135.5
-  // 	},
-  // 	"size": {
-  // 		"width": 95,
-  // 		"height": 95
-  // 	},
-  //	"type": "text",
-  //  "style": {
-  // 		"alignment": "left",
-  // 		"fontSize": 15,
-  // 		"characterSpacing": 0,
-  // 		"lineHeight": 1
-  //  }
-  // }
+  //   {
+  //     id: "uuid-foo-bar",
+  //     fieldName: "customerName",
+  //     sampleData: "john",
+  //     position: {
+  //       x: 91,
+  //       y: 135.5
+  //     },
+  //     size: {
+  //       width: 95,
+  //       height: 95
+  //     },
+  //     type: "text",
+  //     style: {
+  //       alignment: "left",
+  //       fontSize: 15,
+  //       characterSpacing: 0,
+  //       lineHeight: 1
+  //     }
+  //   };
 });
 
 // type image
 onChangeField(changedFieldData => {
   // changedFieldData
-  //  {
-  // 	"id": "uuid-foo-bar",
-  // 	"fieldName": "サイン",
-  // 	"sampleData": "base64......"
-  // 	"position": {
-  // 		"x": 91,
-  // 		"y": 135.5
-  // 	},
-  // 	"size": {
-  // 		"width": 95,
-  // 		"height": 95
-  // 	},
-  // 	"type": "image",
-  // }
+  //   {
+  //     id: "uuid-foo-bar",
+  //     fieldName: "サイン",
+  //     sampleData: "base64......",
+  //     position: {
+  //       x: 91,
+  //       y: 135.5
+  //     },
+  //     size: {
+  //       width: 95,
+  //       height: 95
+  //     },
+  //     type: "image"
+  //   };
 });
 ```
