@@ -37,7 +37,9 @@ class AppContainer extends Component {
       },
     };
   }
-  state = { templateData: getInitialTemplateData() };
+  state = {
+    templateData: getInitialTemplateData(),
+  };
   onChangeTemplate = (value: any, key: string) => {
     let data = {};
     if (key === 'template') {
