@@ -95,7 +95,7 @@ class Position
     public float height;
 }
 
-
+[System.Serializable]
 class TextStyle
 {
     public string alignment;
