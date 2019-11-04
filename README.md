@@ -256,12 +256,12 @@ unityInstance.SendMessage(
 - change は変えたい情報を送る
 
 ```js
-unityInstance.SendMessage('Canvas', 'Remove', 'uuid-hoge-hoge');
-unityInstance.SendMessage('Canvas', 'Add');
+unityInstance.SendMessage('Canvas', 'FieldRemove', 'uuid-hoge-hoge');
+unityInstance.SendMessage('Canvas', 'FieldAdd');
 // type text
 unityInstance.SendMessage(
   'Canvas',
-  'Change',
+  'FieldChange',
   JSON.stringify({
     id: 'uuid-hoge-hoge',
     fieldName: '[お届け先]電話番号',
@@ -286,7 +286,7 @@ unityInstance.SendMessage(
 // type image
 unityInstance.SendMessage(
   'Canvas',
-  'Change',
+  'FieldChange',
   JSON.stringify({
     id: 'uuid-foo-bar',
     fieldName: 'サイン',
