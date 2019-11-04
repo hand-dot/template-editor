@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Field as FieldType, Template, isTextField } from './types';
 
 const sidebarWidth = 240;
 
@@ -47,17 +48,17 @@ const PanelWithAction = ({ head, action, children }: any) => (
 
 const LeftSidebar = ({
   onChangeTemplate,
-  templateName,
+  name,
   image,
-  pageSize,
+  size,
   fontName,
 }: any) => (
   <div style={sidebarStyle({ left: 0 })}>
     <Panel head="Template Name">
       <input
         style={inputStyle()}
-        value={templateName}
-        onChange={e => onChangeTemplate(e.target.value, 'templateName')}
+        value={name}
+        onChange={e => onChangeTemplate(e.target.value, 'name')}
       />
     </Panel>
     <Panel head="Size">
@@ -66,11 +67,11 @@ const LeftSidebar = ({
         <input
           type="number"
           style={miniInputStyle()}
-          value={pageSize.height}
+          value={size.height}
           onChange={e => {
             onChangeTemplate(
-              Object.assign(pageSize, { height: +e.target.value }),
-              'pageSize'
+              Object.assign(size, { height: +e.target.value }),
+              'size'
             );
           }}
         />
@@ -80,11 +81,11 @@ const LeftSidebar = ({
         <input
           type="number"
           style={miniInputStyle()}
-          value={pageSize.width}
+          value={size.width}
           onChange={e => {
             onChangeTemplate(
-              Object.assign(pageSize, { width: +e.target.value }),
-              'pageSize'
+              Object.assign(size, { width: +e.target.value }),
+              'size'
             );
           }}
         />
@@ -114,77 +115,79 @@ const FieldActions = () => (
   </span>
 );
 
-const FieldName = () => (
-  <PanelWithAction head="FieldName" action={<FieldActions />}>
-    <input style={inputStyle()} />
-  </PanelWithAction>
-);
+const Field = ({ field }: { field: FieldType }) => {
+  const { name, position, size, type, sampleData } = field;
+  return (
+    <>
+      <PanelWithAction head="FieldName" action={<FieldActions />}>
+        <input style={inputStyle()} value={name} />
+      </PanelWithAction>
+      <Panel head="Position&Size">
+        <div>
+          <label>X:</label>
+          <input type="number" style={miniInputStyle()} value={position.x} />
+          <label>H:</label>
+          <input type="number" style={miniInputStyle()} value={size.height} />
+        </div>
+        <div>
+          <label>Y:</label>
+          <input type="number" style={miniInputStyle()} value={position.y} />
+          <label>W:</label>
+          <input type="number" style={miniInputStyle()} value={size.width} />
+        </div>
+      </Panel>
+      <Panel head="Type">
+        <div>
+          <select value={type}>
+            <option>Text</option>
+            <option>Image</option>
+          </select>
+        </div>
+      </Panel>
+      {isTextField(field) && (
+        <>
+          <Panel head="FontSize(pt)">
+            <input
+              type="number"
+              style={miniInputStyle()}
+              value={field.style.fontSize}
+            />
+          </Panel>
+          <Panel head="Alignment">
+            <select value={field.style.alignment}>
+              <option>Left</option>
+              <option>Center</option>
+              <option>Right</option>
+            </select>
+          </Panel>
+          <Panel head="CharacterSpacing">
+            <input
+              type="number"
+              style={miniInputStyle()}
+              value={field.style.characterSpacing}
+            />
+          </Panel>
+          <Panel head="LineHeight(em)">
+            <input
+              type="number"
+              style={miniInputStyle()}
+              value={field.style.lineHeight}
+            />
+          </Panel>
+        </>
+      )}
+      <Panel head="SampleData">
+        <input style={inputStyle()} value={sampleData} />
+      </Panel>
+    </>
+  );
+};
 
-const FieldPositionAndSize = () => (
-  <Panel head="Position&Size">
-    <div>
-      <label>X:</label>
-      <input type="number" style={miniInputStyle()} />
-      <label>H:</label>
-      <input type="number" style={miniInputStyle()} />
-    </div>
-    <div>
-      <label>Y:</label>
-      <input type="number" style={miniInputStyle()} />
-      <label>W:</label>
-      <input type="number" style={miniInputStyle()} />
-    </div>
-  </Panel>
-);
-
-const FieldType = () => (
-  <Panel head="Type">
-    <div>
-      <select>
-        <option>Text</option>
-        <option>Image</option>
-      </select>
-    </div>
-  </Panel>
-);
-
-const TextMeta = () => (
-  <>
-    <Panel head="FontSize(pt)">
-      <input type="number" style={miniInputStyle()} />
-    </Panel>
-    <Panel head="LineHeight(em)">
-      <input type="number" style={miniInputStyle()} />
-    </Panel>
-    <Panel head="Alignment">
-      <select>
-        <option>Left</option>
-        <option>Center</option>
-        <option>Right</option>
-      </select>
-    </Panel>
-  </>
-);
-
-const FieldSampleData = () => (
-  <Panel head="SampleData">
-    <input style={inputStyle()} />
-  </Panel>
-);
-
-const Field = () => (
-  <>
-    <FieldName />
-    <FieldPositionAndSize />
-    <FieldType />
-    <TextMeta />
-    <FieldSampleData />
-  </>
-);
-
-const RightSidebar = () => (
+const RightSidebar = ({ fields }: { fields: FieldType[] }) => (
   <div style={sidebarStyle({ right: 0 })}>
-    <Field />
+    {fields.map(field => (
+      <Field field={field} />
+    ))}
     <button style={{ display: 'block', margin: '10px auto' }}>
       Add New Field
     </button>
@@ -192,7 +195,7 @@ const RightSidebar = () => (
 );
 
 interface Props {
-  templateData: any;
+  templateData: Template;
   onChangeTemplate: any;
 }
 interface State {}
@@ -203,13 +206,13 @@ class App extends Component<Props, State> {
   }
   render() {
     const { onChangeTemplate, templateData } = this.props;
-    const { fields, templateName, image, pageSize, fontName } = templateData;
+    const { fields, name, image, size, fontName } = templateData;
     return (
       <>
         <LeftSidebar
-          templateName={templateName}
+          name={name}
           image={image}
-          pageSize={pageSize}
+          size={size}
           fontName={fontName}
           onChangeTemplate={onChangeTemplate}
         />
@@ -223,7 +226,7 @@ class App extends Component<Props, State> {
             height: window.innerHeight,
           }}
         />
-        <RightSidebar />
+        <RightSidebar fields={fields} />
       </>
     );
   }

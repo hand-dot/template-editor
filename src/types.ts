@@ -11,7 +11,7 @@ export interface Template {
 
 interface BaseField {
   id: string;
-  fieldName: string;
+  name: string;
   sampleData: string;
   position: {
     x: number;
