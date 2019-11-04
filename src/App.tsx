@@ -101,9 +101,22 @@ const LeftSidebar = ({
       <button style={{ display: 'block', marginBottom: 10 }}>
         Dowload Template
       </button>
-      <button style={{ display: 'block', marginBottom: 10 }}>
-        Import Image
-      </button>
+      <div style={{ display: 'inline-flex', marginBottom: 10 }}>
+        <input
+          style={{ width: '90%' }}
+          type="file"
+          accept="image/*"
+          onChange={event => {
+            const files = event.target.files;
+            const fileReader = new FileReader();
+            fileReader.addEventListener('load', e => {
+              if (e.target) onChangeTemplate(e.target.result, 'image');
+            });
+            if (files) fileReader.readAsDataURL(files[0]);
+          }}
+        />
+        <button onClick={() => onChangeTemplate('', 'image')}>X</button>
+      </div>
       <button style={{ display: 'block' }}>Import Template</button>
     </Panel>
   </div>

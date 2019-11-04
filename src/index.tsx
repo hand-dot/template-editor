@@ -15,8 +15,8 @@ const getInitialTemplateData = (): Template => ({
   name: 'test',
   image: null,
   size: {
-    width: 510,
-    height: 197,
+    width: 210,
+    height: 297,
   },
   fontName: 'NotoSansCJKjp',
   fields: [],
