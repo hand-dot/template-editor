@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,7 @@ public partial class CanvasBehaviours : MonoBehaviour
             float widthFactor = 2480 / 210f;
             float heightFactor = 3508 / 297f;
             RectTransform sheetTransform = (UnityEngine.RectTransform)gameObject.transform.Find("Sheet");
-            //sheetTransform.GetComponent<Image>().sprite = value.image != null ? toImage(value.image) : null;
+            sheetTransform.GetComponent<Image>().sprite = value.image != null ? toImage(value.image) : null;
             sheetTransform.sizeDelta = new Vector2(value.size.width * widthFactor, value.size.height * heightFactor);
             Debug.Log("factor " + value.size.width * widthFactor);
             activeTemplate = value;
@@ -37,11 +38,13 @@ public partial class CanvasBehaviours : MonoBehaviour
     }
 
 
-    private void toImage(string inputText)
+    private Sprite toImage(string str)
     {
-        byte[] bytesToEncode = Encoding.UTF8.GetBytes(inputText);
-        string encodedText = Convert.ToBase64String(bytesToEncode);
-        //return  e
+        string trimmedStr = Regex.Replace(str, "^data:image.*base64,", "");
+        byte[] imageBytes = Convert.FromBase64String(trimmedStr);
+        Texture2D texture = new Texture2D(2, 2);
+        texture.LoadImage(imageBytes);
+        return Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
     }
 
 }
