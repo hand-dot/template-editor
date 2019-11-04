@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+import { Template } from './types';
 
 const unityInstance = window.globalThis.UnityLoader.instantiate(
   'gameContainer',
@@ -10,10 +11,10 @@ const unityInstance = window.globalThis.UnityLoader.instantiate(
   { onProgress: window.globalThis.UnityProgress }
 );
 
-const getInitialTemplateData = () => ({
-  templateName: 'test',
+const getInitialTemplateData = (): Template => ({
+  name: 'test',
   image: null,
-  pageSize: {
+  size: {
     width: 510,
     height: 197,
   },
@@ -21,7 +22,12 @@ const getInitialTemplateData = () => ({
   fields: [],
 });
 
-class AppContainer extends Component {
+interface Props {}
+interface State {
+  templateData: Template;
+}
+
+class AppContainer extends Component<Props, State> {
   constructor(props: any) {
     super(props);
     const self = this;
