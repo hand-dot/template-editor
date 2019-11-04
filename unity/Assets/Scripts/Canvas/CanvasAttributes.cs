@@ -30,9 +30,8 @@ public partial class CanvasBehaviours : MonoBehaviour
             float widthFactor = 2480 / 210f;
             float heightFactor = 3508 / 297f;
             RectTransform sheetTransform = (UnityEngine.RectTransform)gameObject.transform.Find("Sheet");
-            sheetTransform.GetComponent<Image>().sprite = value.image != null ? toImage(value.image) : null;
+            sheetTransform.GetComponent<Image>().sprite = value.image != null && value.image != "" ? toImage(value.image) : null;
             sheetTransform.sizeDelta = new Vector2(value.size.width * widthFactor, value.size.height * heightFactor);
-            Debug.Log("factor " + value.size.width * widthFactor);
             activeTemplate = value;
         }
     }
