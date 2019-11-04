@@ -112,7 +112,7 @@ const LeftSidebar = ({
             fileReader.addEventListener('load', e => {
               if (e.target) onChangeTemplate(e.target.result, 'image');
             });
-            if (files) fileReader.readAsDataURL(files[0]);
+            if (files && files[0]) fileReader.readAsDataURL(files[0]);
           }}
         />
         <button onClick={() => onChangeTemplate('', 'image')}>X</button>
