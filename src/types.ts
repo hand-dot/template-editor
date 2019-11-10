@@ -1,3 +1,9 @@
+export interface FieldUiState {
+  id: string;
+  order: number; // これはunityに unityInstance.SendMessage('Canvas', 'ChangeTemplate', JSON.stringify(data)); で送って並び順を保障した方がいいかも知れない
+  expand: boolean;
+}
+
 export interface Template {
   name: string;
   image: string | null;

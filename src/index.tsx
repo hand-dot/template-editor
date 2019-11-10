@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { Template } from './types';
+import { Template, FieldUiState, Field } from './types';
 
 const unityInstance = window.globalThis.UnityLoader.instantiate(
   'gameContainer',
@@ -25,6 +25,7 @@ const getInitialTemplateData = (): Template => ({
 interface Props {}
 interface State {
   templateData: Template;
+  fieldsUiStates: FieldUiState[];
 }
 
 class AppContainer extends Component<Props, State> {
@@ -36,12 +37,21 @@ class AppContainer extends Component<Props, State> {
         self.onChangeTemplate(getInitialTemplateData(), 'template');
       },
       onChangeTemplate: json => {
-        this.setState({ templateData: JSON.parse(json) });
+        const templateData = JSON.parse(json);
+        this.setState({
+          templateData,
+          fieldsUiStates: templateData.fields.map((f: Field, i: number) => ({
+            id: f.id,
+            order: i,
+            expand: false,
+          })),
+        });
       },
     };
   }
   state = {
     templateData: getInitialTemplateData(),
+    fieldsUiStates: [],
   };
   onChangeTemplate = (value: any, key: string) => {
     let data = {};
@@ -55,11 +65,20 @@ class AppContainer extends Component<Props, State> {
   onAddField() {
     unityInstance.SendMessage('Canvas', 'FieldAdd', '');
   }
+  handleExpand(id: string) {
+    const { fieldsUiStates } = this.state;
+    const target: any = fieldsUiStates.find((f: FieldUiState) => f.id === id);
+    if (!target) return;
+    target.expand = !target.expand;
+    this.setState({ fieldsUiStates });
+  }
   render() {
-    const { templateData } = this.state;
+    const { templateData, fieldsUiStates } = this.state;
     return (
       <App
+        handleExpand={this.handleExpand.bind(this)}
         templateData={templateData}
+        fieldsUiStates={fieldsUiStates}
         onAddField={this.onAddField.bind(this)}
         onChangeTemplate={this.onChangeTemplate.bind(this)}
       />

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Field as FieldType, Template, isTextField } from './types';
+import {
+  Field as FieldType,
+  Template,
+  isTextField,
+  FieldUiState,
+} from './types';
 
 const sidebarWidth = 200;
 
@@ -122,90 +127,153 @@ const LeftSidebar = ({
   </div>
 );
 
-const FieldActions = () => (
-  <span style={{ fontSize: 'small' }} role="img" aria-label="actions">
-    🔴 🔽 🖐🏻 🗑
-  </span>
+const FieldActions = ({
+  handleExpand,
+  expand,
+  id,
+}: {
+  handleExpand: any;
+  expand: boolean;
+  id: string;
+}) => (
+  <div style={{ fontSize: 'small' }} role="img" aria-label="actions">
+    🔴
+    <button
+      onClick={() => {
+        handleExpand(id);
+      }}
+    >
+      {expand ? '🔼' : '🔽'}
+    </button>
+    🖐🏻
+    <button>🗑</button>
+  </div>
 );
 
-const Field = ({ field }: { field: FieldType }) => {
-  const { name, position, size, type, sampleData } = field;
+const Field = ({
+  field,
+  fieldsUiState,
+  handleExpand,
+}: {
+  field: FieldType;
+  fieldsUiState: FieldUiState;
+  handleExpand: any;
+}) => {
+  const { id, name, position, size, type, sampleData } = field;
   return (
     <>
-      <PanelWithAction head="FieldName" action={<FieldActions />}>
+      <PanelWithAction
+        head="FieldName"
+        action={
+          <FieldActions
+            id={id}
+            expand={fieldsUiState.expand}
+            handleExpand={handleExpand}
+          />
+        }
+      >
         <input style={inputStyle()} value={name} />
       </PanelWithAction>
-      <Panel head="Position&Size">
-        <div>
-          <label>X:</label>
-          <input type="number" style={miniInputStyle()} value={position.x} />
-          <label>H:</label>
-          <input type="number" style={miniInputStyle()} value={size.height} />
-        </div>
-        <div>
-          <label>Y:</label>
-          <input type="number" style={miniInputStyle()} value={position.y} />
-          <label>W:</label>
-          <input type="number" style={miniInputStyle()} value={size.width} />
-        </div>
-      </Panel>
-      <Panel head="Type">
-        <div>
-          <select value={type}>
-            <option>Text</option>
-            <option>Image</option>
-          </select>
-        </div>
-      </Panel>
-      {isTextField(field) && (
+      {fieldsUiState && fieldsUiState.expand ? (
         <>
-          <Panel head="FontSize(pt)">
-            <input
-              type="number"
-              style={miniInputStyle()}
-              value={field.style.fontSize}
-            />
+          <Panel head="Position&Size">
+            <div>
+              <label>X:</label>
+              <input
+                type="number"
+                style={miniInputStyle()}
+                value={position.x}
+              />
+              <label>H:</label>
+              <input
+                type="number"
+                style={miniInputStyle()}
+                value={size.height}
+              />
+            </div>
+            <div>
+              <label>Y:</label>
+              <input
+                type="number"
+                style={miniInputStyle()}
+                value={position.y}
+              />
+              <label>W:</label>
+              <input
+                type="number"
+                style={miniInputStyle()}
+                value={size.width}
+              />
+            </div>
           </Panel>
-          <Panel head="Alignment">
-            <select value={field.style.alignment}>
-              <option>Left</option>
-              <option>Center</option>
-              <option>Right</option>
-            </select>
+          <Panel head="Type">
+            <div>
+              <select value={type}>
+                <option>Text</option>
+                <option>Image</option>
+              </select>
+            </div>
           </Panel>
-          <Panel head="CharacterSpacing">
-            <input
-              type="number"
-              style={miniInputStyle()}
-              value={field.style.characterSpacing}
-            />
-          </Panel>
-          <Panel head="LineHeight(em)">
-            <input
-              type="number"
-              style={miniInputStyle()}
-              value={field.style.lineHeight}
-            />
+          {isTextField(field) && (
+            <>
+              <Panel head="FontSize(pt)">
+                <input
+                  type="number"
+                  style={miniInputStyle()}
+                  value={field.style.fontSize}
+                />
+              </Panel>
+              <Panel head="Alignment">
+                <select value={field.style.alignment}>
+                  <option>Left</option>
+                  <option>Center</option>
+                  <option>Right</option>
+                </select>
+              </Panel>
+              <Panel head="CharacterSpacing">
+                <input
+                  type="number"
+                  style={miniInputStyle()}
+                  value={field.style.characterSpacing}
+                />
+              </Panel>
+              <Panel head="LineHeight(em)">
+                <input
+                  type="number"
+                  style={miniInputStyle()}
+                  value={field.style.lineHeight}
+                />
+              </Panel>
+            </>
+          )}
+          <Panel head="SampleData">
+            <input style={inputStyle()} value={sampleData} />
           </Panel>
         </>
-      )}
-      <Panel head="SampleData">
-        <input style={inputStyle()} value={sampleData} />
-      </Panel>
+      ) : null}
     </>
   );
 };
 
 const RightSidebar = ({
   fields,
+  fieldsUiStates,
   onAddField,
+  handleExpand,
 }: {
   fields: FieldType[];
+  fieldsUiStates: FieldUiState[];
   onAddField: any;
+  handleExpand: any;
 }) => (
   <div style={sidebarStyle({ right: 0, overflowY: 'scroll' })}>
     {fields.map(field => (
-      <Field key={field.id} field={field} />
+      <Field
+        key={field.id}
+        field={field}
+        fieldsUiState={fieldsUiStates.find(f => f.id === field.id)!}
+        handleExpand={handleExpand}
+      />
     ))}
     <button
       style={{ display: 'block', margin: '10px auto' }}
@@ -218,13 +286,21 @@ const RightSidebar = ({
 
 interface Props {
   templateData: Template;
+  fieldsUiStates: FieldUiState[];
   onChangeTemplate: any;
   onAddField: any;
+  handleExpand: any;
 }
 interface State {}
 class App extends Component<Props, State> {
   render() {
-    const { onChangeTemplate, templateData, onAddField } = this.props;
+    const {
+      onChangeTemplate,
+      templateData,
+      fieldsUiStates,
+      onAddField,
+      handleExpand,
+    } = this.props;
     const { fields, name, image, size, fontName } = templateData;
     return (
       <>
@@ -245,7 +321,12 @@ class App extends Component<Props, State> {
             height: window.innerHeight,
           }}
         />
-        <RightSidebar fields={fields} onAddField={onAddField} />
+        <RightSidebar
+          fields={fields}
+          fieldsUiStates={fieldsUiStates}
+          onAddField={onAddField}
+          handleExpand={handleExpand}
+        />
       </>
     );
   }
