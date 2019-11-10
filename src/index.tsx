@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import uuid from 'uuid';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { Template, TextField } from './types';
+import { Template } from './types';
 
 const unityInstance = window.globalThis.UnityLoader.instantiate(
   'gameContainer',
@@ -21,27 +20,6 @@ const getInitialTemplateData = (): Template => ({
   },
   fontName: 'NotoSansCJKjp',
   fields: [],
-});
-
-const getInitialTextFieldData = (): TextField => ({
-  id: uuid(),
-  name: '',
-  sampleData: '',
-  position: {
-    x: 0,
-    y: 0,
-  },
-  size: {
-    width: 0,
-    height: 0,
-  },
-  type: 'text',
-  style: {
-    alignment: 'left',
-    fontSize: 18,
-    characterSpacing: 0,
-    lineHeight: 0,
-  },
 });
 
 interface Props {}
