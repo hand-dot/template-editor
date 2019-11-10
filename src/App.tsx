@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Field as FieldType, Template, isTextField } from './types';
 
-const sidebarWidth = 240;
+const sidebarWidth = 200;
 
 const sidebarStyle = (option: any) => ({
   ...option,
@@ -196,12 +196,21 @@ const Field = ({ field }: { field: FieldType }) => {
   );
 };
 
-const RightSidebar = ({ fields }: { fields: FieldType[] }) => (
+const RightSidebar = ({
+  fields,
+  onAddField,
+}: {
+  fields: FieldType[];
+  onAddField: any;
+}) => (
   <div style={sidebarStyle({ right: 0 })}>
     {fields.map(field => (
-      <Field field={field} />
+      <Field key={field.id} field={field} />
     ))}
-    <button style={{ display: 'block', margin: '10px auto' }}>
+    <button
+      style={{ display: 'block', margin: '10px auto' }}
+      onClick={onAddField}
+    >
       Add New Field
     </button>
   </div>
@@ -210,15 +219,12 @@ const RightSidebar = ({ fields }: { fields: FieldType[] }) => (
 interface Props {
   templateData: Template;
   onChangeTemplate: any;
+  onAddField: any;
 }
 interface State {}
 class App extends Component<Props, State> {
-  componentDidMount() {}
-  componentDidUpdate() {
-    console.log(this.props.templateData, 'componentDidUpdate');
-  }
   render() {
-    const { onChangeTemplate, templateData } = this.props;
+    const { onChangeTemplate, templateData, onAddField } = this.props;
     const { fields, name, image, size, fontName } = templateData;
     return (
       <>
@@ -239,7 +245,7 @@ class App extends Component<Props, State> {
             height: window.innerHeight,
           }}
         />
-        <RightSidebar fields={fields} />
+        <RightSidebar fields={fields} onAddField={onAddField} />
       </>
     );
   }

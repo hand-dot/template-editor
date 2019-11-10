@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import uuid from 'uuid';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { Template } from './types';
+import { Template, TextField } from './types';
 
 const unityInstance = window.globalThis.UnityLoader.instantiate(
   'gameContainer',
@@ -22,6 +23,27 @@ const getInitialTemplateData = (): Template => ({
   fields: [],
 });
 
+const getInitialTextFieldData = (): TextField => ({
+  id: uuid(),
+  name: '',
+  sampleData: '',
+  position: {
+    x: 0,
+    y: 0,
+  },
+  size: {
+    width: 0,
+    height: 0,
+  },
+  type: 'text',
+  style: {
+    alignment: 'left',
+    fontSize: 18,
+    characterSpacing: 0,
+    lineHeight: 0,
+  },
+});
+
 interface Props {}
 interface State {
   templateData: Template;
@@ -36,9 +58,6 @@ class AppContainer extends Component<Props, State> {
         self.onChangeTemplate(getInitialTemplateData(), 'template');
       },
       onChangeTemplate: json => {
-        console.log('=============fromUnity================');
-        console.log(json);
-        console.log('=============fromUnity================');
         this.setState({ templateData: JSON.parse(json) });
       },
     };
@@ -53,17 +72,23 @@ class AppContainer extends Component<Props, State> {
     } else {
       data = { ...this.state.templateData, ...{ [key]: value } };
     }
-    console.log('--------------toUnity----------------');
-    console.log(data);
-    console.log('--------------toUnity----------------');
     unityInstance.SendMessage('Canvas', 'ChangeTemplate', JSON.stringify(data));
   };
+  onAddField() {
+    unityInstance.SendMessage('Canvas', 'FieldAdd', '');
+    // FIXME 本当は下記のメソッドは不要
+    // window.WebInteraction.onChangeTemplate にStateの更新を委託するが今は処理がないので必要
+    const { templateData } = this.state;
+    templateData.fields = templateData.fields.concat(getInitialTextFieldData());
+    this.setState({ templateData });
+  }
   render() {
     const { templateData } = this.state;
     return (
       <App
         templateData={templateData}
-        onChangeTemplate={this.onChangeTemplate}
+        onAddField={this.onAddField.bind(this)}
+        onChangeTemplate={this.onChangeTemplate.bind(this)}
       />
     );
   }
