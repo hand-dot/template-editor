@@ -203,7 +203,7 @@ const RightSidebar = ({
   fields: FieldType[];
   onAddField: any;
 }) => (
-  <div style={sidebarStyle({ right: 0 })}>
+  <div style={sidebarStyle({ right: 0, overflowY: 'scroll' })}>
     {fields.map(field => (
       <Field key={field.id} field={field} />
     ))}
