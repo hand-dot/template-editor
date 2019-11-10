@@ -48,6 +48,7 @@ public partial class CanvasBehaviours : MonoBehaviour
 
 }
 
+/** Template */
 [System.Serializable]
 class Template
 {
@@ -66,15 +67,7 @@ class PageSize
     public int height = 297;
 }
 
-[System.Serializable]
-class BaseField
-{
-    public string id = "";
-    public string name = "";
-    public string sampleData = "";
-    public Position position = new Position();
-}
-
+/** TextField ImageField */
 [System.Serializable]
 class TextField : BaseField
 {
@@ -89,9 +82,25 @@ class ImageField : BaseField
     public object style;
 }
 
+[System.Serializable]
+class BaseField
+{
+    public string id = "";
+    public string name = "";
+    public string sampleData = "";
+    public Position position = new Position();
+}
+
 
 [System.Serializable]
 class Position
+{
+    public float x;
+    public float y;
+}
+
+[System.Serializable]
+class Size
 {
     public float width;
     public float height;

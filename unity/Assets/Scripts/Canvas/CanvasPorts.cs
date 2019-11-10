@@ -25,7 +25,7 @@ public partial class CanvasBehaviours : MonoBehaviour
         BaseField baseField = new TextField();
         ActiveTemplate.fields.Add(baseField);
 #if !UNITY_EDITOR && UNITY_WEBGL
-        OnChangeTemplate(JsonUtility.ToJson(baseField));
+        OnChangeTemplate(JsonUtility.ToJson(ActiveTemplate));
 #endif
     }
 
