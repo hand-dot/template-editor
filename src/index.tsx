@@ -76,11 +76,6 @@ class AppContainer extends Component<Props, State> {
   };
   onAddField() {
     unityInstance.SendMessage('Canvas', 'FieldAdd', '');
-    // FIXME 本当は下記のメソッドは不要
-    // window.WebInteraction.onChangeTemplate にStateの更新を委託するが今は処理がないので必要
-    const { templateData } = this.state;
-    templateData.fields = templateData.fields.concat(getInitialTextFieldData());
-    this.setState({ templateData });
   }
   render() {
     const { templateData } = this.state;
