@@ -23,6 +23,7 @@ public partial class CanvasBehaviours : MonoBehaviour
             pageSize.width = Convert.ToInt32(sheetTransform.rect.width * widthFactor);
             pageSize.height = Convert.ToInt32(sheetTransform.rect.height * heightFactor);
             template.size = pageSize;
+            template.fields = activeTemplate.fields;
             return template;
         }
         set
@@ -89,6 +90,7 @@ class BaseField
     public string name = "";
     public string sampleData = "";
     public Position position = new Position();
+    public Size size = new Size();
 }
 
 
@@ -102,15 +104,15 @@ class Position
 [System.Serializable]
 class Size
 {
-    public float width;
-    public float height;
+    public float width = 500;
+    public float height = 100;
 }
 
 [System.Serializable]
 class TextStyle
 {
-    public string alignment;
-    public int fontSize;
-    public float characterSpacing;
-    public float lineHeight;
+    public string alignment = "";
+    public int fontSize = 16;
+    public float characterSpacing = 1f;
+    public float lineHeight = 1f;
 }

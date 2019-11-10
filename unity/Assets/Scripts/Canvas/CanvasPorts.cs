@@ -24,6 +24,7 @@ public partial class CanvasBehaviours : MonoBehaviour
         inputField.transform.parent = transform.Find("Sheet");
         BaseField baseField = new TextField();
         ActiveTemplate.fields.Add(baseField);
+        //Debug.Log(JsonUtility.ToJson(ActiveTemplate));
 #if !UNITY_EDITOR && UNITY_WEBGL
         OnChangeTemplate(JsonUtility.ToJson(ActiveTemplate));
 #endif
