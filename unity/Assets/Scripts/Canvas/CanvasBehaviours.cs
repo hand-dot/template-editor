@@ -62,12 +62,6 @@ public partial class CanvasBehaviours : MonoBehaviour
         }
     }
 
-    public void OnCreateElement()
-    {
-        //var obj = Instantiate(reactiveInputPrefab, Vector3.zero, Quaternion.identity);
-        //obj.transform.parent = transform;
-    }
-
     public void SetGrabCanvas()
     {
         IsGrabbingActive = !IsGrabbingActive;

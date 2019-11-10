@@ -18,6 +18,17 @@ public partial class CanvasBehaviours : MonoBehaviour
 #endif
     }
 
+    public void FieldAdd()
+    {
+        GameObject inputField = Instantiate(reactiveInputPrefab, Vector3.zero, Quaternion.identity);
+        inputField.transform.parent = transform.Find("Sheet");
+        BaseField baseField = new TextField();
+        ActiveTemplate.fields.Add(baseField);
+#if !UNITY_EDITOR && UNITY_WEBGL
+        OnChangeTemplate(JsonUtility.ToJson(baseField));
+#endif
+    }
+
 
     [System.Serializable]
     private class CanvasFocus
