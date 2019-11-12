@@ -86,7 +86,7 @@ class ImageField : BaseField
 [System.Serializable]
 class BaseField
 {
-    public string id = "";
+    public string id = Guid.NewGuid().ToString();
     public string name = "";
     public string sampleData = "";
     public Position position = new Position();

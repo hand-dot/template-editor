@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { Template, FieldUiState, Field } from './types';
+import { Field, FieldUiState, Template } from './types';
 
 const unityInstance = window.globalThis.UnityLoader.instantiate(
   'gameContainer',
@@ -29,6 +29,10 @@ interface State {
 }
 
 class AppContainer extends Component<Props, State> {
+  state = {
+    templateData: getInitialTemplateData(),
+    fieldsUiStates: [],
+  };
   constructor(props: any) {
     super(props);
     const self = this;
@@ -49,10 +53,6 @@ class AppContainer extends Component<Props, State> {
       },
     };
   }
-  state = {
-    templateData: getInitialTemplateData(),
-    fieldsUiStates: [],
-  };
   onChangeTemplate = (value: any, key: string) => {
     let data = {};
     if (key === 'template') {
