@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+} from 'react-sortable-hoc';
 import './App.css';
 import {
   Field as FieldType,
@@ -12,7 +17,6 @@ const sidebarWidth = 200;
 const sidebarStyle = (option: any) => ({
   ...option,
   position: 'absolute',
-  zIndex: 1,
   width: sidebarWidth,
   height: window.innerHeight,
   backgroundColor: '#444',
@@ -127,6 +131,8 @@ const LeftSidebar = ({
   </div>
 );
 
+const DragHandle = SortableHandle(() => <span>🖐</span>);
+
 const FieldActions = ({
   handleExpand,
   onRemoveField,
@@ -147,7 +153,7 @@ const FieldActions = ({
     >
       {expand ? '🔼' : '🔽'}
     </button>
-    🖐🏻
+    <DragHandle />
     <button
       onClick={() => {
         onRemoveField(id);
@@ -272,31 +278,74 @@ const RightSidebar = ({
   onAddField,
   onRemoveField,
   handleExpand,
+  onSortEndField,
 }: {
   fields: FieldType[];
   fieldsUiStates: FieldUiState[];
   onAddField: any;
   onRemoveField: any;
   handleExpand: any;
-}) => (
-  <div style={sidebarStyle({ right: 0, overflowY: 'scroll' })}>
-    {fields.map(field => (
+  onSortEndField: any;
+}) => {
+  const SortableItem = SortableElement(
+    ({
+      field,
+      fieldsUiState,
+    }: {
+      field: FieldType;
+      fieldsUiState: FieldUiState;
+    }) => (
       <Field
-        key={field.id}
         field={field}
-        fieldsUiState={fieldsUiStates.find(f => f.id === field.id)!}
+        fieldsUiState={fieldsUiState}
         onRemoveField={onRemoveField}
         handleExpand={handleExpand}
       />
-    ))}
-    <button
-      style={{ display: 'block', margin: '10px auto' }}
-      onClick={onAddField}
-    >
-      Add New Field
-    </button>
-  </div>
-);
+    )
+  );
+
+  const SortableList = SortableContainer(
+    ({
+      _fields,
+      _fieldsUiStates,
+    }: {
+      _fields: FieldType[];
+      _fieldsUiStates: FieldUiState[];
+    }) => {
+      return (
+        <div>
+          {_fields.map((field: FieldType, index: number) => (
+            <SortableItem
+              key={field.id}
+              index={index}
+              field={field}
+              fieldsUiState={_fieldsUiStates.find(f => f.id === field.id)!}
+            />
+          ))}
+        </div>
+      );
+    }
+  );
+
+  return (
+    <div style={sidebarStyle({ right: 0, overflowY: 'scroll' })}>
+      <SortableList
+        _fields={fields}
+        _fieldsUiStates={fieldsUiStates}
+        useDragHandle={true}
+        axis="y"
+        lockAxis="y"
+        onSortEnd={onSortEndField}
+      />
+      <button
+        style={{ display: 'block', margin: '10px auto' }}
+        onClick={onAddField}
+      >
+        Add New Field
+      </button>
+    </div>
+  );
+};
 
 interface Props {
   templateData: Template;
@@ -305,6 +354,7 @@ interface Props {
   onAddField: any;
   onRemoveField: any;
   handleExpand: any;
+  onSortEndField: any;
 }
 interface State {}
 class App extends Component<Props, State> {
@@ -316,6 +366,7 @@ class App extends Component<Props, State> {
       onAddField,
       onRemoveField,
       handleExpand,
+      onSortEndField,
     } = this.props;
     const { fields, name, image, size, fontName } = templateData;
     return (
@@ -343,6 +394,7 @@ class App extends Component<Props, State> {
           onAddField={onAddField}
           onRemoveField={onRemoveField}
           handleExpand={handleExpand}
+          onSortEndField={onSortEndField}
         />
       </>
     );

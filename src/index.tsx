@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { arrayMove } from 'react-sortable-hoc';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -41,6 +42,7 @@ class AppContainer extends Component<Props, State> {
       },
       onChangeTemplate: json => {
         const templateData = JSON.parse(json);
+        console.log(templateData);
         this.setState({
           templateData,
           fieldsUiStates: templateData.fields.map((f: Field, i: number) => {
@@ -81,6 +83,18 @@ class AppContainer extends Component<Props, State> {
     target.expand = !target.expand;
     this.setState({ fieldsUiStates });
   }
+  onSortEndField({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number;
+    newIndex: number;
+  }) {
+    this.onChangeTemplate(
+      arrayMove(this.state.templateData.fields, oldIndex, newIndex),
+      'fields'
+    );
+  }
 
   render() {
     const { templateData, fieldsUiStates } = this.state;
@@ -89,6 +103,7 @@ class AppContainer extends Component<Props, State> {
         templateData={templateData}
         fieldsUiStates={fieldsUiStates}
         handleExpand={this.handleExpand.bind(this)}
+        onSortEndField={this.onSortEndField.bind(this)}
         onAddField={this.onAddField.bind(this)}
         onRemoveField={this.onRemoveField.bind(this)}
         onChangeTemplate={this.onChangeTemplate.bind(this)}
