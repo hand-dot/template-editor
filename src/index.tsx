@@ -49,7 +49,7 @@ class AppContainer extends Component<Props, State> {
               (s: FieldUiState) => s.id === f.id
             )!;
             const expand = fieldUiState ? fieldUiState.expand : true;
-            return { id: f.id, order: i, expand };
+            return { id: f.id, expand };
           }),
         });
       },
