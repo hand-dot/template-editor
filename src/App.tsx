@@ -4,6 +4,7 @@ import {
   SortableElement,
   SortableHandle,
 } from 'react-sortable-hoc';
+import set from 'lodash.set';
 import './App.css';
 import {
   Field as FieldType,
@@ -169,13 +170,23 @@ const Field = ({
   fieldsUiState,
   handleExpand,
   onRemoveField,
+  onChangeField,
 }: {
   field: FieldType;
   fieldsUiState: FieldUiState;
   handleExpand: any;
   onRemoveField: any;
+  onChangeField: any;
 }) => {
   const { id, name, position, size, type, sampleData } = field;
+  const _onChangeField = (e: any) => {
+    const fieldCopy = JSON.parse(JSON.stringify(field));
+    const path = e.currentTarget.name;
+    const value =
+      e.currentTarget.type === 'number' ? +e.target.value : e.target.value;
+    set(fieldCopy, path, value);
+    onChangeField(fieldCopy);
+  };
   return (
     <div style={{ marginBottom: '0.5rem' }}>
       <PanelWithAction
@@ -189,7 +200,12 @@ const Field = ({
           />
         }
       >
-        <input style={inputStyle()} value={name} />
+        <input
+          style={inputStyle()}
+          onChange={_onChangeField}
+          value={name}
+          name="name"
+        />
       </PanelWithAction>
       {fieldsUiState && fieldsUiState.expand ? (
         <>
@@ -199,12 +215,16 @@ const Field = ({
               <input
                 type="number"
                 style={miniInputStyle()}
+                name="position.x"
+                onChange={_onChangeField}
                 value={position.x}
               />
               <label>H:</label>
               <input
                 type="number"
                 style={miniInputStyle()}
+                name="size.height"
+                onChange={_onChangeField}
                 value={size.height}
               />
             </div>
@@ -213,21 +233,25 @@ const Field = ({
               <input
                 type="number"
                 style={miniInputStyle()}
+                name="position.y"
+                onChange={_onChangeField}
                 value={position.y}
               />
               <label>W:</label>
               <input
                 type="number"
                 style={miniInputStyle()}
+                name="size.width"
+                onChange={_onChangeField}
                 value={size.width}
               />
             </div>
           </Panel>
           <Panel head="Type">
             <div>
-              <select value={type}>
-                <option>Text</option>
-                <option>Image</option>
+              <select name="type" onChange={_onChangeField} value={type}>
+                <option value="text">Text</option>
+                <option value="image">Image</option>
               </select>
             </div>
           </Panel>
@@ -237,20 +261,28 @@ const Field = ({
                 <input
                   type="number"
                   style={miniInputStyle()}
+                  name="field.style.fontSize"
+                  onChange={_onChangeField}
                   value={field.style.fontSize}
                 />
               </Panel>
               <Panel head="Alignment">
-                <select value={field.style.alignment}>
-                  <option>Left</option>
-                  <option>Center</option>
-                  <option>Right</option>
+                <select
+                  name="field.style.alignment"
+                  onChange={_onChangeField}
+                  value={field.style.alignment}
+                >
+                  <option value="left">Left</option>
+                  <option value="center">Center</option>
+                  <option value="right">Right</option>
                 </select>
               </Panel>
               <Panel head="CharacterSpacing">
                 <input
                   type="number"
                   style={miniInputStyle()}
+                  name="field.style.characterSpacing"
+                  onChange={_onChangeField}
                   value={field.style.characterSpacing}
                 />
               </Panel>
@@ -258,13 +290,20 @@ const Field = ({
                 <input
                   type="number"
                   style={miniInputStyle()}
+                  name="field.style.lineHeight"
+                  onChange={_onChangeField}
                   value={field.style.lineHeight}
                 />
               </Panel>
             </>
           )}
           <Panel head="SampleData">
-            <input style={inputStyle()} value={sampleData} />
+            <input
+              style={inputStyle()}
+              name="sampleData"
+              onChange={_onChangeField}
+              value={sampleData}
+            />
           </Panel>
         </>
       ) : null}
@@ -275,6 +314,7 @@ const Field = ({
 const RightSidebar = ({
   fields,
   fieldsUiStates,
+  onChangeField,
   onAddField,
   onRemoveField,
   handleExpand,
@@ -282,6 +322,7 @@ const RightSidebar = ({
 }: {
   fields: FieldType[];
   fieldsUiStates: FieldUiState[];
+  onChangeField: any;
   onAddField: any;
   onRemoveField: any;
   handleExpand: any;
@@ -299,6 +340,7 @@ const RightSidebar = ({
         field={field}
         fieldsUiState={fieldsUiState}
         onRemoveField={onRemoveField}
+        onChangeField={onChangeField}
         handleExpand={handleExpand}
       />
     )
@@ -351,6 +393,7 @@ interface Props {
   templateData: Template;
   fieldsUiStates: FieldUiState[];
   onChangeTemplate: any;
+  onChangeField: any;
   onAddField: any;
   onRemoveField: any;
   handleExpand: any;
@@ -361,6 +404,7 @@ class App extends Component<Props, State> {
   render() {
     const {
       onChangeTemplate,
+      onChangeField,
       templateData,
       fieldsUiStates,
       onAddField,
@@ -393,6 +437,7 @@ class App extends Component<Props, State> {
           fieldsUiStates={fieldsUiStates}
           onAddField={onAddField}
           onRemoveField={onRemoveField}
+          onChangeField={onChangeField}
           handleExpand={handleExpand}
           onSortEndField={onSortEndField}
         />

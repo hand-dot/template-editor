@@ -65,6 +65,10 @@ class AppContainer extends Component<Props, State> {
     unityInstance.SendMessage('Canvas', 'ChangeTemplate', JSON.stringify(data));
   }
 
+  onChangeField(field: Field) {
+    unityInstance.SendMessage('Canvas', 'FieldChange', JSON.stringify(field));
+  }
+
   onAddField() {
     unityInstance.SendMessage('Canvas', 'FieldAdd', '');
   }
@@ -105,6 +109,7 @@ class AppContainer extends Component<Props, State> {
         onSortEndField={this.onSortEndField.bind(this)}
         onAddField={this.onAddField.bind(this)}
         onRemoveField={this.onRemoveField.bind(this)}
+        onChangeField={this.onChangeField.bind(this)}
         onChangeTemplate={this.onChangeTemplate.bind(this)}
       />
     );
