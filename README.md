@@ -249,7 +249,7 @@ unityInstance.SendMessage(
 
 - active は最新の変更されたフィールドの ID を find して点灯させる
 - expand は Javascript で UI ステートとして持つ
-- grab は最終的に positions の配列の並び順となるので UI ステートとして持つ
+- ~grab は最終的に positions の配列の並び順となるので UI ステートとして持つ~
 
 - remove は消して欲しいフィールドの ID を送る
 - add は引数なし
