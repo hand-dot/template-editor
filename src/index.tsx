@@ -44,11 +44,11 @@ class AppContainer extends Component<Props, State> {
         const templateData = JSON.parse(json);
         this.setState({
           templateData,
-          fieldsUiStates: templateData.fields.map((f: Field, i: number) => ({
-            id: f.id,
-            order: i,
-            expand: false,
-          })),
+          fieldsUiStates: templateData.fields.map((f: Field, i: number) => {
+            const fieldUiState: FieldUiState = this.state.fieldsUiStates[i];
+            const expand = fieldUiState ? fieldUiState.expand : false;
+            return { id: f.id, order: i, expand };
+          }),
         });
       },
     };
