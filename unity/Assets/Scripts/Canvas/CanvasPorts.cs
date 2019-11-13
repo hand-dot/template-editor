@@ -23,8 +23,22 @@ public partial class CanvasBehaviours : MonoBehaviour
         GameObject inputField = Instantiate(reactiveInputPrefab, Vector3.zero, Quaternion.identity);
         inputField.transform.parent = transform.Find("Sheet");
         BaseField baseField = new TextField();
+        inputField.name = baseField.id;
         ActiveTemplate.fields.Add(baseField);
         //Debug.Log(JsonUtility.ToJson(ActiveTemplate));
+#if !UNITY_EDITOR && UNITY_WEBGL
+        OnChangeTemplate(JsonUtility.ToJson(ActiveTemplate));
+#endif
+    }
+
+    public void FieldRemove(string id)
+    {
+        BaseField targetField = ActiveTemplate.fields.Find(field => field.id == id);
+        if (targetField != null)
+        {
+            Destroy(GameObject.Find(id));
+            ActiveTemplate.fields.Remove(targetField);
+        }
 #if !UNITY_EDITOR && UNITY_WEBGL
         OnChangeTemplate(JsonUtility.ToJson(ActiveTemplate));
 #endif
