@@ -42,7 +42,6 @@ class AppContainer extends Component<Props, State> {
       },
       onChangeTemplate: json => {
         const templateData = JSON.parse(json);
-        console.log(templateData);
         this.setState({
           templateData,
           fieldsUiStates: templateData.fields.map((f: Field, i: number) => {
