@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import {
   Field as FieldType,
-  Template,
-  isTextField,
   FieldUiState,
+  isTextField,
+  Template,
 } from './types';
 
 const sidebarWidth = 200;
@@ -129,10 +129,12 @@ const LeftSidebar = ({
 
 const FieldActions = ({
   handleExpand,
+  onRemoveField,
   expand,
   id,
 }: {
   handleExpand: any;
+  onRemoveField: any;
   expand: boolean;
   id: string;
 }) => (
@@ -146,7 +148,13 @@ const FieldActions = ({
       {expand ? '🔼' : '🔽'}
     </button>
     🖐🏻
-    <button>🗑</button>
+    <button
+      onClick={() => {
+        onRemoveField(id);
+      }}
+    >
+      🗑
+    </button>
   </div>
 );
 
@@ -154,14 +162,16 @@ const Field = ({
   field,
   fieldsUiState,
   handleExpand,
+  onRemoveField,
 }: {
   field: FieldType;
   fieldsUiState: FieldUiState;
   handleExpand: any;
+  onRemoveField: any;
 }) => {
   const { id, name, position, size, type, sampleData } = field;
   return (
-    <>
+    <div style={{ marginBottom: '0.5rem' }}>
       <PanelWithAction
         head="FieldName"
         action={
@@ -169,6 +179,7 @@ const Field = ({
             id={id}
             expand={fieldsUiState.expand}
             handleExpand={handleExpand}
+            onRemoveField={onRemoveField}
           />
         }
       >
@@ -251,7 +262,7 @@ const Field = ({
           </Panel>
         </>
       ) : null}
-    </>
+    </div>
   );
 };
 
@@ -259,11 +270,13 @@ const RightSidebar = ({
   fields,
   fieldsUiStates,
   onAddField,
+  onRemoveField,
   handleExpand,
 }: {
   fields: FieldType[];
   fieldsUiStates: FieldUiState[];
   onAddField: any;
+  onRemoveField: any;
   handleExpand: any;
 }) => (
   <div style={sidebarStyle({ right: 0, overflowY: 'scroll' })}>
@@ -272,6 +285,7 @@ const RightSidebar = ({
         key={field.id}
         field={field}
         fieldsUiState={fieldsUiStates.find(f => f.id === field.id)!}
+        onRemoveField={onRemoveField}
         handleExpand={handleExpand}
       />
     ))}
@@ -289,6 +303,7 @@ interface Props {
   fieldsUiStates: FieldUiState[];
   onChangeTemplate: any;
   onAddField: any;
+  onRemoveField: any;
   handleExpand: any;
 }
 interface State {}
@@ -299,6 +314,7 @@ class App extends Component<Props, State> {
       templateData,
       fieldsUiStates,
       onAddField,
+      onRemoveField,
       handleExpand,
     } = this.props;
     const { fields, name, image, size, fontName } = templateData;
@@ -325,6 +341,7 @@ class App extends Component<Props, State> {
           fields={fields}
           fieldsUiStates={fieldsUiStates}
           onAddField={onAddField}
+          onRemoveField={onRemoveField}
           handleExpand={handleExpand}
         />
       </>

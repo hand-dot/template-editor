@@ -35,51 +35,62 @@ class AppContainer extends Component<Props, State> {
   };
   constructor(props: any) {
     super(props);
-    const self = this;
     window.WebInteraction = {
-      onInit() {
-        self.onChangeTemplate(getInitialTemplateData(), 'template');
+      onInit: () => {
+        this.onChangeTemplate(getInitialTemplateData(), 'template');
       },
       onChangeTemplate: json => {
         const templateData = JSON.parse(json);
         this.setState({
           templateData,
           fieldsUiStates: templateData.fields.map((f: Field, i: number) => {
-            const fieldUiState: FieldUiState = this.state.fieldsUiStates[i];
-            const expand = fieldUiState ? fieldUiState.expand : false;
+            const fieldUiState: FieldUiState = this.state.fieldsUiStates.find(
+              (s: FieldUiState) => s.id === f.id
+            )!;
+            const expand = fieldUiState ? fieldUiState.expand : true;
             return { id: f.id, order: i, expand };
           }),
         });
       },
     };
   }
-  onChangeTemplate = (value: any, key: string) => {
-    let data = {};
-    if (key === 'template') {
-      data = value;
-    } else {
-      data = { ...this.state.templateData, ...{ [key]: value } };
-    }
+
+  onChangeTemplate(value: any, key: string) {
+    const data =
+      key === 'template'
+        ? value
+        : { ...this.state.templateData, ...{ [key]: value } };
+
     unityInstance.SendMessage('Canvas', 'ChangeTemplate', JSON.stringify(data));
-  };
+  }
+
   onAddField() {
     unityInstance.SendMessage('Canvas', 'FieldAdd', '');
   }
+
+  onRemoveField(id: string) {
+    unityInstance.SendMessage('Canvas', 'FieldRemove', id);
+  }
+
   handleExpand(id: string) {
     const { fieldsUiStates } = this.state;
     const target: any = fieldsUiStates.find((f: FieldUiState) => f.id === id);
-    if (!target) return;
+    if (!target) {
+      return;
+    }
     target.expand = !target.expand;
     this.setState({ fieldsUiStates });
   }
+
   render() {
     const { templateData, fieldsUiStates } = this.state;
     return (
       <App
-        handleExpand={this.handleExpand.bind(this)}
         templateData={templateData}
         fieldsUiStates={fieldsUiStates}
+        handleExpand={this.handleExpand.bind(this)}
         onAddField={this.onAddField.bind(this)}
+        onRemoveField={this.onRemoveField.bind(this)}
         onChangeTemplate={this.onChangeTemplate.bind(this)}
       />
     );
