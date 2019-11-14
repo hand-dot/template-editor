@@ -23,6 +23,15 @@ public partial class CanvasBehaviours : MonoBehaviour
             pageSize.width = Convert.ToInt32(sheetTransform.rect.width * widthFactor);
             pageSize.height = Convert.ToInt32(sheetTransform.rect.height * heightFactor);
             template.size = pageSize;
+            for (int i = 0; i < activeTemplate.fields.Count; i++)
+            {
+                RectTransform tmpTransform = (UnityEngine.RectTransform)transform.Find("Sheet").Find(activeTemplate.fields[i].id);
+                Field field = activeTemplate.fields[i];
+                field.size.width = tmpTransform ? tmpTransform.rect.width : field.size.width;
+                field.size.height = tmpTransform ? tmpTransform.rect.height : field.size.height;
+                field.position.x = tmpTransform ? tmpTransform.rect.x : field.position.x;
+                field.position.y = tmpTransform ? tmpTransform.rect.y : field.position.y;
+            }
             template.fields = activeTemplate.fields;
             return template;
         }
@@ -57,7 +66,7 @@ class Template
     public string image = "";
     public string fontName = "NotoSansCJKjp";
     public PageSize size = new PageSize();
-    public List<BaseField> fields = new List<BaseField>();
+    public List<Field> fields = new List<Field>();
 }
 
 
@@ -70,27 +79,26 @@ class PageSize
 
 /** TextField ImageField */
 [System.Serializable]
-class TextField : BaseField
-{
-    public string type = "text";
-    public TextStyle style = new TextStyle();
-}
-
-[System.Serializable]
-class ImageField : BaseField
-{
-    public string type = "image";
-    public object style;
-}
-
-[System.Serializable]
-class BaseField
+class Field
 {
     public string id = Guid.NewGuid().ToString();
     public string name = "";
     public string sampleData = "";
     public Position position = new Position();
     public Size size = new Size();
+    public string type;
+    public TextStyle style;
+
+    public Field()
+    {
+        type = "text";
+        style = new TextStyle();
+    }
+    public Field(string fieldType)
+    {
+        type = fieldType == "image" ? "image" : "text";
+        style = fieldType == "image" ? null : new TextStyle();
+    }
 }
 
 
