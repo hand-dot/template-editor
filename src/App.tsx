@@ -14,7 +14,7 @@ import {
   Size,
 } from './types';
 
-const sidebarWidth = 200;
+const sidebarWidth = 240;
 
 const sidebarStyle = (option: any) => ({
   ...option,
@@ -118,26 +118,56 @@ const LeftSidebar = ({
         Dowload Template
       </button>
       <div style={{ display: 'inline-flex', marginBottom: 10 }}>
-        <input
-          style={{ width: '90%' }}
-          type="file"
-          accept="image/*"
-          onChange={event => {
-            const files = event.target.files;
-            const fileReader = new FileReader();
-            fileReader.addEventListener('load', e => {
-              if (e.target) {
-                onChangeTemplate(e.target.result, 'image');
+        <label>
+          Load Background Image
+          <input
+            style={{ width: '90%' }}
+            type="file"
+            accept="image/*"
+            onChange={event => {
+              const files = event.target.files;
+              const fileReader = new FileReader();
+              fileReader.addEventListener('load', e => {
+                if (e.target) {
+                  onChangeTemplate(e.target.result, 'image');
+                }
+              });
+              if (files && files[0]) {
+                fileReader.readAsDataURL(files[0]);
               }
-            });
-            if (files && files[0]) {
-              fileReader.readAsDataURL(files[0]);
-            }
-          }}
-        />
+            }}
+            onClick={e => {
+              e.currentTarget.value = '';
+            }}
+          />
+        </label>
         <button onClick={() => onChangeTemplate('', 'image')}>X</button>
       </div>
-      <button style={{ display: 'block' }}>Import Template</button>
+      <div style={{ display: 'inline-flex', marginBottom: 10 }}>
+        <label>
+          Import Template
+          <input
+            style={{ width: '90%' }}
+            type="file"
+            accept="application/json"
+            onChange={event => {
+              const files = event.target.files;
+              const fileReader = new FileReader();
+              fileReader.addEventListener('load', e => {
+                if (e.target) {
+                  onChangeTemplate(e.target.result, 'template');
+                }
+              });
+              if (files && files[0]) {
+                fileReader.readAsText(files[0]);
+              }
+            }}
+            onClick={e => {
+              e.currentTarget.value = '';
+            }}
+          />
+        </label>
+      </div>
     </Panel>
   </div>
 );
