@@ -3,13 +3,15 @@ export interface FieldUiState {
   expand: boolean;
 }
 
+export interface Size {
+  width: number;
+  height: number;
+}
+
 export interface Template {
   name: string;
   image: string | null;
-  size: {
-    width: number;
-    height: number;
-  };
+  size: Size;
   fontName: 'NotoSansCJKjp';
   fields: Field[];
 }
@@ -22,10 +24,7 @@ interface BaseField {
     x: number;
     y: number;
   };
-  size: {
-    width: number;
-    height: number;
-  };
+  size: Size;
 }
 
 export interface TextField extends BaseField {

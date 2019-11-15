@@ -99,6 +99,19 @@ class AppContainer extends Component<Props, State> {
     );
   }
 
+  onDownload() {
+    const blob = new Blob([JSON.stringify(this.state.templateData)], {
+      type: 'application/json',
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${this.state.templateData.name || 'notitle'}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+    link.remove();
+  }
+
   render() {
     const { templateData, fieldsUiStates } = this.state;
     return (
@@ -106,6 +119,7 @@ class AppContainer extends Component<Props, State> {
         templateData={templateData}
         fieldsUiStates={fieldsUiStates}
         handleExpand={this.handleExpand.bind(this)}
+        onDownload={this.onDownload.bind(this)}
         onSortEndField={this.onSortEndField.bind(this)}
         onAddField={this.onAddField.bind(this)}
         onRemoveField={this.onRemoveField.bind(this)}

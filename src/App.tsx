@@ -11,6 +11,7 @@ import {
   FieldUiState,
   isTextField,
   Template,
+  Size,
 } from './types';
 
 const sidebarWidth = 200;
@@ -58,71 +59,80 @@ const PanelWithAction = ({ head, action, children }: any) => (
 
 const LeftSidebar = ({
   onChangeTemplate,
+  onDownload,
   name,
   image,
   size,
   fontName,
-}: any) => (
+}: {
+  onChangeTemplate: any;
+  onDownload: any;
+  name: string;
+  image: string | null;
+  size: Size;
+  fontName: string;
+}) => (
   <div style={sidebarStyle({ left: 0 })}>
-    <Panel head='Template Name'>
+    <Panel head="Template Name">
       <input
         style={inputStyle()}
         value={name}
         onChange={e => onChangeTemplate(e.target.value, 'name')}
       />
     </Panel>
-    <Panel head='Size'>
+    <Panel head="Size">
       <div>
         <label>H:</label>
         <input
-          type='number'
+          type="number"
           style={miniInputStyle()}
           value={size.height}
           onChange={e => {
-            onChangeTemplate(
-              {...size,  height: +e.target.value},
-              'size'
-            );
+            onChangeTemplate({ ...size, height: +e.target.value }, 'size');
           }}
         />
       </div>
       <div>
         <label>W:</label>
         <input
-          type='number'
+          type="number"
           style={miniInputStyle()}
           value={size.width}
           onChange={e => {
-            onChangeTemplate(
-              {...size,  width: +e.target.value},
-              'size'
-            );
+            onChangeTemplate({ ...size, width: +e.target.value }, 'size');
           }}
         />
       </div>
     </Panel>
-    <Panel head='Font'>
+    <Panel head="Font">
       <select>
         <option>Serif</option>
         <option>Sans-serif</option>
       </select>
     </Panel>
-    <Panel head='Action'>
-      <button style={{ display: 'block', marginBottom: 10 }}>
+    <Panel head="Action">
+      <button
+        onClick={onDownload}
+        style={{ display: 'block', marginBottom: 10 }}
+      >
         Dowload Template
       </button>
       <div style={{ display: 'inline-flex', marginBottom: 10 }}>
         <input
           style={{ width: '90%' }}
-          type='file'
-          accept='image/*'
+          type="file"
+          accept="image/*"
           onChange={event => {
             const files = event.target.files;
             const fileReader = new FileReader();
             fileReader.addEventListener('load', e => {
-              if (e.target) { onChangeTemplate(e.target.result, 'image'); }
+              if (e.target) {
+                onChangeTemplate(e.target.result, 'image');
+              }
             });
-            if (files && files[0]) { fileReader.readAsDataURL(files[0]); }
+            if (files && files[0]) {
+              fileReader.readAsDataURL(files[0]);
+            }
           }}
         />
         <button onClick={() => onChangeTemplate('', 'image')}>X</button>
@@ -145,7 +155,7 @@ const FieldActions = ({
   expand: boolean;
   id: string;
 }) => (
-  <div style={{ fontSize: 'small' }} role='img' aria-label='actions'>
+  <div style={{ fontSize: 'small' }} role="img" aria-label="actions">
     🔴
     <button
       onClick={() => {
@@ -190,7 +200,7 @@ const Field = ({
   return (
     <div style={{ marginBottom: '0.5rem' }}>
       <PanelWithAction
-        head='FieldName'
+        head="FieldName"
         action={
           <FieldActions
             id={id}
@@ -204,26 +214,26 @@ const Field = ({
           style={inputStyle()}
           onChange={_onChangeField}
           value={name}
-          name='name'
+          name="name"
         />
       </PanelWithAction>
       {fieldsUiState && fieldsUiState.expand ? (
         <>
-          <Panel head='Position&Size'>
+          <Panel head="Position&Size">
             <div>
               <label>X:</label>
               <input
-                type='number'
+                type="number"
                 style={miniInputStyle()}
-                name='position.x'
+                name="position.x"
                 onChange={_onChangeField}
                 value={position.x}
               />
               <label>H:</label>
               <input
-                type='number'
+                type="number"
                 style={miniInputStyle()}
-                name='size.height'
+                name="size.height"
                 onChange={_onChangeField}
                 value={size.height}
               />
@@ -231,76 +241,76 @@ const Field = ({
             <div>
               <label>Y:</label>
               <input
-                type='number'
+                type="number"
                 style={miniInputStyle()}
-                name='position.y'
+                name="position.y"
                 onChange={_onChangeField}
                 value={position.y}
               />
               <label>W:</label>
               <input
-                type='number'
+                type="number"
                 style={miniInputStyle()}
-                name='size.width'
+                name="size.width"
                 onChange={_onChangeField}
                 value={size.width}
               />
             </div>
           </Panel>
-          <Panel head='Type'>
+          <Panel head="Type">
             <div>
-              <select name='type' onChange={_onChangeField} value={type}>
-                <option value='text'>Text</option>
-                <option value='image'>Image</option>
+              <select name="type" onChange={_onChangeField} value={type}>
+                <option value="text">Text</option>
+                <option value="image">Image</option>
               </select>
             </div>
           </Panel>
           {isTextField(field) && (
             <>
-              <Panel head='FontSize(pt)'>
+              <Panel head="FontSize(pt)">
                 <input
-                  type='number'
+                  type="number"
                   style={miniInputStyle()}
-                  name='field.style.fontSize'
+                  name="field.style.fontSize"
                   onChange={_onChangeField}
                   value={field.style.fontSize}
                 />
               </Panel>
-              <Panel head='Alignment'>
+              <Panel head="Alignment">
                 <select
-                  name='field.style.alignment'
+                  name="field.style.alignment"
                   onChange={_onChangeField}
                   value={field.style.alignment}
                 >
-                  <option value='left'>Left</option>
-                  <option value='center'>Center</option>
-                  <option value='right'>Right</option>
+                  <option value="left">Left</option>
+                  <option value="center">Center</option>
+                  <option value="right">Right</option>
                 </select>
               </Panel>
-              <Panel head='CharacterSpacing'>
+              <Panel head="CharacterSpacing">
                 <input
-                  type='number'
+                  type="number"
                   style={miniInputStyle()}
-                  name='field.style.characterSpacing'
+                  name="field.style.characterSpacing"
                   onChange={_onChangeField}
                   value={field.style.characterSpacing}
                 />
               </Panel>
-              <Panel head='LineHeight(em)'>
+              <Panel head="LineHeight(em)">
                 <input
-                  type='number'
+                  type="number"
                   style={miniInputStyle()}
-                  name='field.style.lineHeight'
+                  name="field.style.lineHeight"
                   onChange={_onChangeField}
                   value={field.style.lineHeight}
                 />
               </Panel>
             </>
           )}
-          <Panel head='SampleData'>
+          <Panel head="SampleData">
             <input
               style={inputStyle()}
-              name='sampleData'
+              name="sampleData"
               onChange={_onChangeField}
               value={sampleData}
             />
@@ -375,8 +385,8 @@ const RightSidebar = ({
         _fields={fields}
         _fieldsUiStates={fieldsUiStates}
         useDragHandle={true}
-        axis='y'
-        lockAxis='y'
+        axis="y"
+        lockAxis="y"
         onSortEnd={onSortEndField}
       />
       <button
@@ -398,6 +408,7 @@ interface Props {
   onRemoveField: any;
   handleExpand: any;
   onSortEndField: any;
+  onDownload: any;
 }
 interface State {}
 class App extends Component<Props, State> {
@@ -411,6 +422,7 @@ class App extends Component<Props, State> {
       onRemoveField,
       handleExpand,
       onSortEndField,
+      onDownload,
     } = this.props;
     const { fields, name, image, size, fontName } = templateData;
     return (
@@ -421,9 +433,10 @@ class App extends Component<Props, State> {
           size={size}
           fontName={fontName}
           onChangeTemplate={onChangeTemplate}
+          onDownload={onDownload}
         />
         <div
-          id='gameContainer'
+          id="gameContainer"
           style={{
             position: 'absolute',
             zIndex: 0,
