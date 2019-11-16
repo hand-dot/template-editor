@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { arrayMove } from 'react-sortable-hoc';
-import App from './App';
+import App from './components/App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { Field, FieldUiState, Template } from './types';
