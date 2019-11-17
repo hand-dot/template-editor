@@ -49,7 +49,7 @@ public class InputField : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 return;
             }
             wrapperObject.transform.position = Vector3.Lerp(wrapperObject.transform.position, mouseWorldPos, 15 * Time.deltaTime);
-             transform.GetComponentInParent<CanvasBehaviours>().FireChangeTempalte();
+             transform.GetComponentInParent<CanvasBehaviours>().FireOnChangeTemplate();
         }
     }
 

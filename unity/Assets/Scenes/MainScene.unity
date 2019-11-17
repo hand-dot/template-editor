@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f606ec7d98f43fbb6e26bd9bec005e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reactiveInputPrefab: {fileID: 8003146683442823942, guid: f8eef2a54663545269446ca68da0fda8,
+  reactiveInputPrefab: {fileID: 8310793843209187316, guid: f8eef2a54663545269446ca68da0fda8,
     type: 3}
   mouseTextures:
   - {fileID: 0}

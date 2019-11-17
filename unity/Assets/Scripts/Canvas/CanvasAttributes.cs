@@ -25,12 +25,13 @@ public partial class CanvasBehaviours : MonoBehaviour
             template.size = pageSize;
             for (int i = 0; i < activeTemplate.fields.Count; i++)
             {
-                RectTransform tmpTransform = (UnityEngine.RectTransform)transform.Find("Sheet").Find(activeTemplate.fields[i].id);
+                RectTransform fieldTransf = (UnityEngine.RectTransform)transform.Find("Sheet").Find(activeTemplate.fields[i].id);
                 Field field = activeTemplate.fields[i];
-                field.size.width = tmpTransform ? tmpTransform.rect.width : field.size.width;
-                field.size.height = tmpTransform ? tmpTransform.rect.height : field.size.height;
-                field.position.x = tmpTransform ? tmpTransform.rect.x : field.position.x;
-                field.position.y = tmpTransform ? tmpTransform.rect.y : field.position.y;
+                field.sampleData = fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text;
+                field.size.width = fieldTransf ? fieldTransf.rect.width : field.size.width;
+                field.size.height = fieldTransf ? fieldTransf.rect.height : field.size.height;
+                field.position.x = fieldTransf ? fieldTransf.position.x * widthFactor : field.position.x;
+                field.position.y = fieldTransf ? fieldTransf.position.y * heightFactor : field.position.y;
             }
             template.fields = activeTemplate.fields;
             return template;
@@ -42,8 +43,28 @@ public partial class CanvasBehaviours : MonoBehaviour
             RectTransform sheetTransform = (UnityEngine.RectTransform)gameObject.transform.Find("Sheet");
             sheetTransform.GetComponent<Image>().sprite = value.image != null && value.image != "" ? toImage(value.image) : null;
             sheetTransform.sizeDelta = new Vector2(value.size.width * widthFactor, value.size.height * heightFactor);
+            for (int i = 0; i < value.fields.Count; i++)
+            {
+                RectTransform fieldTransf = sheetTransform.Find(value.fields[i].id)
+                        ? (RectTransform)sheetTransform.Find(value.fields[i].id)
+                        : InstantiateField().GetComponent<RectTransform>();
+
+                Field field = value.fields[i];
+                fieldTransf.name = field.name;
+                fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text = fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text;
+                fieldTransf.sizeDelta = new Vector2(value.size.width * widthFactor, value.size.height * heightFactor);
+                fieldTransf.position = new Vector3(field.position.x, field.position.y, fieldTransf.position.z);
+            }
             activeTemplate = value;
         }
+    }
+
+    private GameObject InstantiateField()
+    {
+        GameObject inputField = Instantiate(reactiveInputPrefab, Vector3.zero, Quaternion.identity);
+        inputField.GetComponentInChildren<UnityEngine.UI.InputField>().onValueChanged.AddListener((val) => { FireOnChangeTemplate(); });
+        inputField.transform.parent = transform.Find("Sheet");
+        return inputField;
     }
 
 
@@ -112,8 +133,8 @@ class Position
 [System.Serializable]
 class Size
 {
-    public float width = 500;
-    public float height = 100;
+    public float width = 60;
+    public float height = 10;
 }
 
 [System.Serializable]

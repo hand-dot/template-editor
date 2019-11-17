@@ -12,11 +12,12 @@ public partial class CanvasBehaviours : MonoBehaviour
     public void ChangeTemplate(string json)
     {
         ActiveTemplate = JsonUtility.FromJson<Template>(json);
-        FireChangeTempalte();
+        FireOnChangeTemplate();
     }
 
-    public void FireChangeTempalte()
+    public void FireOnChangeTemplate()
     {
+        Debug.Log(JsonUtility.ToJson(ActiveTemplate));
 #if !UNITY_EDITOR && UNITY_WEBGL
         OnChangeTemplate(JsonUtility.ToJson(ActiveTemplate));
 #endif
@@ -24,14 +25,13 @@ public partial class CanvasBehaviours : MonoBehaviour
 
     public void FieldAdd()
     {
-        GameObject inputField = Instantiate(reactiveInputPrefab, Vector3.zero, Quaternion.identity);
-        inputField.transform.parent = transform.Find("Sheet");
+        GameObject inputField = InstantiateField();
         Field baseField = new Field("text");
         inputField.name = baseField.id;
         ActiveTemplate.fields.Add(baseField);
         //Debug.Log(JsonUtility.ToJson(ActiveTemplate));
         //ActiveTemplate.GetType() == typeof(TextField);
-        FireChangeTempalte();
+        FireOnChangeTemplate();
     }
 
     public void FieldRemove(string id)
@@ -42,7 +42,7 @@ public partial class CanvasBehaviours : MonoBehaviour
             Destroy(GameObject.Find(id));
             ActiveTemplate.fields.Remove(targetField);
         }
-        FireChangeTempalte();
+        FireOnChangeTemplate();
     }
 
 

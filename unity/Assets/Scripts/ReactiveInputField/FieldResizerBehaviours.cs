@@ -9,7 +9,7 @@ public class FieldResizerBehaviours : MonoBehaviour, IPointerDownHandler, IPoint
 {
     public bool IsPointerDown { get; set; }
     public Vector3 mouseOffset = Vector3.zero;
-    public GameObject reactiveInputField;
+    private GameObject reactiveInputField;
 
     // Start is called before the first frame update
     void Start()
