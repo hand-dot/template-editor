@@ -181,7 +181,8 @@ export default ({
             </>
           )}
           <Panel head="SampleData">
-            <input
+            <textarea
+              rows={3}
               style={inputStyle()}
               name="sampleData"
               onChange={_onChangeField}
