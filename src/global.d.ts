@@ -15,6 +15,7 @@ declare global {
     WebInteraction: {
       onInit: () => void;
       onChangeTemplate: (json: string) => void;
+      onChangeField: (json: string) => void;
     };
   }
 }

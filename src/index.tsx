@@ -53,6 +53,18 @@ class AppContainer extends Component<Props, State> {
           }),
         });
       },
+      onChangeField: json => {
+        const targetField = JSON.parse(json);
+        this.setState({
+          templateData: {
+            ...this.state.templateData,
+            fields: this.state.templateData.fields.map(field =>
+              field.id === targetField.id ? targetField : field
+            ),
+          },
+          fieldsUiStates: this.state.fieldsUiStates,
+        });
+      },
     };
   }
 

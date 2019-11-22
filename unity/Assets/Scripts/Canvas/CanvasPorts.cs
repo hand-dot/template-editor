@@ -7,6 +7,9 @@ public partial class CanvasBehaviours : MonoBehaviour
     public static extern void OnChangeTemplate(string jsonData);
 
     [DllImport("__Internal")]
+    public static extern void OnChangeField(string jsonData);
+
+    [DllImport("__Internal")]
     public static extern void OnInit();
 
     public void ChangeTemplate(string json)
@@ -23,11 +26,20 @@ public partial class CanvasBehaviours : MonoBehaviour
 #endif
     }
 
+    public void FireOnChangeField(string fieldId)
+    {
+        Field targetField = ActiveTemplate.fields.Find(field => field.id == fieldId);
+        Debug.Log(JsonUtility.ToJson(targetField) + fieldId);
+#if !UNITY_EDITOR && UNITY_WEBGL
+        OnChangeField(JsonUtility.ToJson(targetField));
+#endif
+    }
+
     public void FieldAdd()
     {
-        GameObject inputField = InstantiateField();
+        GameObject inputFieldGameObj = InstantiateField();
         Field baseField = new Field("text");
-        inputField.name = baseField.id;
+        inputFieldGameObj.name = baseField.id;
         ActiveTemplate.fields.Add(baseField);
         //Debug.Log(JsonUtility.ToJson(ActiveTemplate));
         //ActiveTemplate.GetType() == typeof(TextField);
@@ -43,6 +55,27 @@ public partial class CanvasBehaviours : MonoBehaviour
             ActiveTemplate.fields.Remove(targetField);
         }
         FireOnChangeTemplate();
+    }
+
+    public void FieldChange(string jsonField)
+    {
+        float widthFactor = 2480 / 210f;
+        float heightFactor = 3508 / 297f;
+        Field parsedField = JsonUtility.FromJson<Field>(jsonField);
+        int index = ActiveTemplate.fields.FindIndex(field => field.id == parsedField.id);
+        RectTransform sheetTransform = (UnityEngine.RectTransform)gameObject.transform.Find("Sheet");
+        RectTransform fieldTransf = (RectTransform)sheetTransform.Find(ActiveTemplate.fields[index].id);
+        if (index > 0 && fieldTransf)
+        {
+            fieldTransf.name = parsedField.name;
+            fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text = fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text;
+            fieldTransf.sizeDelta = new Vector2(parsedField.size.width * widthFactor, parsedField.size.height * heightFactor);
+            fieldTransf.position = new Vector3(parsedField.position.x, parsedField.position.y, fieldTransf.position.z);
+            FireOnChangeField(parsedField.name);
+        } else
+        {
+            Debug.Log("Field not found");
+        }
     }
 
 

@@ -43,12 +43,16 @@ public partial class CanvasBehaviours : MonoBehaviour
             RectTransform sheetTransform = (UnityEngine.RectTransform)gameObject.transform.Find("Sheet");
             sheetTransform.GetComponent<Image>().sprite = value.image != null && value.image != "" ? toImage(value.image) : null;
             sheetTransform.sizeDelta = new Vector2(value.size.width * widthFactor, value.size.height * heightFactor);
+
+            foreach (Transform child in sheetTransform)
+            {
+                Destroy(child.gameObject);
+            }
+
             for (int i = 0; i < value.fields.Count; i++)
             {
-                RectTransform fieldTransf = sheetTransform.Find(value.fields[i].id)
-                        ? (RectTransform)sheetTransform.Find(value.fields[i].id)
-                        : InstantiateField().GetComponent<RectTransform>();
 
+                RectTransform fieldTransf = InstantiateField().GetComponent<RectTransform>();
                 Field field = value.fields[i];
                 fieldTransf.name = field.name;
                 fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text = fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text;
