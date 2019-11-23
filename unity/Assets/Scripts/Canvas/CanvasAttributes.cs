@@ -55,7 +55,7 @@ public partial class CanvasBehaviours : MonoBehaviour
                 Field field = value.fields[i];
                 fieldTransf.name = field.id;
                 fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text = fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text;
-                fieldTransf.sizeDelta = new Vector2(value.size.width * widthFactor, value.size.height * heightFactor);
+                fieldTransf.sizeDelta = new Vector2(field.size.width * widthFactor, field.size.height * heightFactor);
                 fieldTransf.position = new Vector3(
                     (field.position.x - (value.size.width / 2)) * widthFactor,
                     (field.position.y + (value.size.height / 2)) * heightFactor,
