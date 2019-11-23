@@ -7,39 +7,38 @@ using UnityEngine.UI;
 
 public partial class CanvasBehaviours : MonoBehaviour
 {
+
+    private float widthFactor = 2480 / 210f;
+    private float heightFactor = 3508 / 297f;
     private Template activeTemplate;
     private Template ActiveTemplate
     {
         get
         {
-            float widthFactor = 210f / 2480;
-            float heightFactor = 297f / 3508;
             RectTransform sheetTransform = (UnityEngine.RectTransform)gameObject.transform.Find("Sheet");
             Template template = new Template();
             template.name = activeTemplate.name;
             template.image = activeTemplate.image;
             template.fontName = activeTemplate.fontName;
             PageSize pageSize = new PageSize();
-            pageSize.width = Convert.ToInt32(sheetTransform.rect.width * widthFactor);
-            pageSize.height = Convert.ToInt32(sheetTransform.rect.height * heightFactor);
+            pageSize.width = Convert.ToInt32(sheetTransform.rect.width / widthFactor);
+            pageSize.height = Convert.ToInt32(sheetTransform.rect.height / heightFactor);
             template.size = pageSize;
             for (int i = 0; i < activeTemplate.fields.Count; i++)
             {
                 RectTransform fieldTransf = (UnityEngine.RectTransform)transform.Find("Sheet").Find(activeTemplate.fields[i].id);
                 Field field = activeTemplate.fields[i];
                 field.sampleData = fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text;
-                field.size.width = fieldTransf ? fieldTransf.rect.width : field.size.width;
-                field.size.height = fieldTransf ? fieldTransf.rect.height : field.size.height;
-                field.position.x = fieldTransf ? fieldTransf.position.x * widthFactor : field.position.x;
-                field.position.y = fieldTransf ? fieldTransf.position.y * heightFactor : field.position.y;
+                field.size.width = fieldTransf.rect.width / widthFactor;
+                field.size.height = fieldTransf.rect.height / heightFactor;
+                field.position.x = fieldTransf.position.x / widthFactor;
+                field.position.y = fieldTransf.position.y / heightFactor;
             }
             template.fields = activeTemplate.fields;
             return template;
         }
         set
         {
-            float widthFactor = 2480 / 210f;
-            float heightFactor = 3508 / 297f;
             RectTransform sheetTransform = (UnityEngine.RectTransform)gameObject.transform.Find("Sheet");
             sheetTransform.GetComponent<Image>().sprite = value.image != null && value.image != "" ? toImage(value.image) : null;
             sheetTransform.sizeDelta = new Vector2(value.size.width * widthFactor, value.size.height * heightFactor);
@@ -54,10 +53,10 @@ public partial class CanvasBehaviours : MonoBehaviour
 
                 RectTransform fieldTransf = InstantiateField().GetComponent<RectTransform>();
                 Field field = value.fields[i];
-                fieldTransf.name = field.name;
+                fieldTransf.name = field.id;
                 fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text = fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text;
                 fieldTransf.sizeDelta = new Vector2(value.size.width * widthFactor, value.size.height * heightFactor);
-                fieldTransf.position = new Vector3(field.position.x, field.position.y, fieldTransf.position.z);
+                fieldTransf.position = new Vector3(field.position.x * widthFactor, field.position.y, fieldTransf.position.z * heightFactor);
             }
             activeTemplate = value;
         }
