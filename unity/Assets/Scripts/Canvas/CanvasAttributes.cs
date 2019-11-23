@@ -31,8 +31,8 @@ public partial class CanvasBehaviours : MonoBehaviour
                 field.sampleData = fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text;
                 field.size.width = fieldTransf.rect.width / widthFactor;
                 field.size.height = fieldTransf.rect.height / heightFactor;
-                field.position.x = fieldTransf.position.x / widthFactor;
-                field.position.y = fieldTransf.position.y / heightFactor;
+                field.position.x = fieldTransf.position.x / widthFactor + pageSize.width / 2;
+                field.position.y = fieldTransf.position.y / heightFactor - pageSize.height / 2;
             }
             template.fields = activeTemplate.fields;
             return template;
@@ -56,7 +56,11 @@ public partial class CanvasBehaviours : MonoBehaviour
                 fieldTransf.name = field.id;
                 fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text = fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text;
                 fieldTransf.sizeDelta = new Vector2(value.size.width * widthFactor, value.size.height * heightFactor);
-                fieldTransf.position = new Vector3(field.position.x * widthFactor, field.position.y, fieldTransf.position.z * heightFactor);
+                fieldTransf.position = new Vector3(
+                    (field.position.x - (value.size.width / 2)) * widthFactor,
+                    (field.position.y + (value.size.height / 2)) * heightFactor,
+                    fieldTransf.position.z
+                 );
             }
             activeTemplate = value;
         }
