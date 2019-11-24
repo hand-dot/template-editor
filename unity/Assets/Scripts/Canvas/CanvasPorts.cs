@@ -93,8 +93,8 @@ public partial class CanvasBehaviours : MonoBehaviour
             fieldTransf.GetComponentInChildren<UnityEngine.UI.InputField>().text = parsedField.sampleData;
             fieldTransf.sizeDelta = new Vector2(parsedField.size.width * widthFactor, parsedField.size.height * heightFactor);
             fieldTransf.position = new Vector3(
-                (parsedField.position.x - ActiveTemplate.size.width / 2) * widthFactor,
-                (parsedField.position.y + ActiveTemplate.size.height / 2) * heightFactor,
+                (parsedField.position.x + parsedField.size.width / 2  - ActiveTemplate.size.width / 2) * widthFactor,
+                (ActiveTemplate.size.height - (parsedField.position.y + parsedField.size.height / 2  + ActiveTemplate.size.height / 2)) * heightFactor,
                 fieldTransf.position.z);
             ActiveTemplate.fields[index] = parsedField;
             FireOnChangeField(parsedField.id);
