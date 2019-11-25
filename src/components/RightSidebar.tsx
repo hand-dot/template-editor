@@ -4,6 +4,62 @@ import Field from './Field';
 import { sidebarStyle } from './style';
 import { Field as FieldType, FieldUiState } from '../types';
 
+const SortableItem = SortableElement(
+  ({
+    field,
+    fieldsUiState,
+    onChangeField,
+    onRemoveField,
+    handleExpand,
+  }: {
+    field: FieldType;
+    fieldsUiState: FieldUiState;
+    onChangeField: any;
+    onRemoveField: any;
+    handleExpand: any;
+  }) => (
+    <Field
+      field={field}
+      fieldsUiState={fieldsUiState}
+      onRemoveField={onRemoveField}
+      onChangeField={onChangeField}
+      handleExpand={handleExpand}
+    />
+  )
+);
+
+const SortableList = SortableContainer(
+  ({
+    fields,
+    fieldsUiStates,
+    onChangeField,
+    onRemoveField,
+    handleExpand,
+  }: {
+    fields: FieldType[];
+    fieldsUiStates: FieldUiState[];
+    onChangeField: any;
+    onRemoveField: any;
+    handleExpand: any;
+  }) => {
+    return (
+      <div>
+        {fields.map((field: FieldType, index: number) => (
+          <SortableItem
+            key={field.id}
+            index={index}
+            field={field}
+            fieldsUiState={fieldsUiStates.find(f => f.id === field.id)!}
+            onChangeField={onChangeField}
+            onRemoveField={onRemoveField}
+            handleExpand={handleExpand}
+          />
+        ))}
+      </div>
+    );
+  }
+);
+
 export default ({
   fields,
   fieldsUiStates,
@@ -21,56 +77,18 @@ export default ({
   handleExpand: any;
   onSortEndField: any;
 }) => {
-  const SortableItem = SortableElement(
-    ({
-      field,
-      fieldsUiState,
-    }: {
-      field: FieldType;
-      fieldsUiState: FieldUiState;
-    }) => (
-      <Field
-        field={field}
-        fieldsUiState={fieldsUiState}
-        onRemoveField={onRemoveField}
-        onChangeField={onChangeField}
-        handleExpand={handleExpand}
-      />
-    )
-  );
-
-  const SortableList = SortableContainer(
-    ({
-      _fields,
-      _fieldsUiStates,
-    }: {
-      _fields: FieldType[];
-      _fieldsUiStates: FieldUiState[];
-    }) => {
-      return (
-        <div>
-          {_fields.map((field: FieldType, index: number) => (
-            <SortableItem
-              key={field.id}
-              index={index}
-              field={field}
-              fieldsUiState={_fieldsUiStates.find(f => f.id === field.id)!}
-            />
-          ))}
-        </div>
-      );
-    }
-  );
-
   return (
     <div style={sidebarStyle({ right: 0, overflowY: 'scroll' })}>
       <SortableList
-        _fields={fields}
-        _fieldsUiStates={fieldsUiStates}
+        fields={fields}
+        fieldsUiStates={fieldsUiStates}
         useDragHandle={true}
         axis="y"
         lockAxis="y"
         onSortEnd={onSortEndField}
+        onChangeField={onChangeField}
+        onRemoveField={onRemoveField}
+        handleExpand={handleExpand}
       />
       <button
         style={{ display: 'block', margin: '10px auto' }}
